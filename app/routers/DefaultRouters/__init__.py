@@ -1,0 +1,11 @@
+from app.routers.DefaultRouters.productRouter import router as productRouter
+from app.routers.DefaultRouters.categoryRoter import router as categoryRouter
+from app.routers.DefaultRouters.productCategoryRouter import router as productCategoryRouter
+from app.routers.DefaultRouters.subCategoryRouter import router as subCategoryRouter
+from app.routers.DefaultRouters.personRouter import router as personRouter
+from app.routers.DefaultRouters.companyRouter import router as companyRouter
+from app.routers.DefaultRouters.userRouter import router as userRouter
+from app.routers.DefaultRouters.userProfileRouter import router as userProfileRouter
+from app.routers.DefaultRouters.permissionsRouter import router as permissionsRouter
+from app.routers.DefaultRouters.tokenRouter import router as tokenRouter
+from app.routers.DefaultRouters.employeeRouter import router as employeeRouter
