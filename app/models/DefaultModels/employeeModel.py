@@ -14,4 +14,4 @@ class Employees(Base):
     email = Column(String(100), unique=True, index=True)
     address = Column(String(200))
 
-    company = relationship("Company", back_populates="employees")
+    company = relationship("Company", back_populates="employees", foreign_keys="Employees.id_emp")

@@ -34,7 +34,7 @@ class CompanyCreate(CompanyBase):
 
 class Company(CompanyBase):
     id: int
-    employees: List[Optional["Employees"]]
+    employees: List[Optional[Employees]]
 
     class Config:
         from_attributes = True
