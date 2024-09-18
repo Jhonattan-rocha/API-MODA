@@ -6,7 +6,7 @@ from app.schemas import ProductCategoryBase, ProductCategoryCreate
 
 
 async def create_product_category(db: AsyncSession, product_category: ProductCategoryBase):
-    db_product_category = ProductCategory(**product_category.dict())
+    db_product_category = ProductCategory(**product_category.model_dump())
     db.add(db_product_category)
     await db.commit()
     await db.refresh(db_product_category)
@@ -38,7 +38,7 @@ async def update_product_category(db: AsyncSession, product_category_id: int,
     if product_category is None:
         return None
 
-    for key, value in updated_product_category.dict().items():
+    for key, value in updated_product_category.model_dump().items():
         if str(value):
             setattr(product_category, key, value)
 

@@ -14,7 +14,7 @@ async def create_user(db: AsyncSession, user: UserBase):
     user.salt = gen_random_string(15)
     hash_password = hashlib.sha256(user.salt.encode()).hexdigest() + hashlib.sha256(user.password.encode()).hexdigest()
     user.password = hashlib.sha256(hash_password.encode()).hexdigest()
-    db_user = User(**user.dict())
+    db_user = User(**user.model_dump())
     db.add(db_user)
     await db.commit()
     await db.refresh(db_user)
@@ -57,7 +57,7 @@ async def update_user(db: AsyncSession, user_id: int, updated_user: UserCreate):
     if user is None:
         return None
 
-    for key, value in updated_user.dict().items():
+    for key, value in updated_user.model_dump().items():
         if str(value):
             setattr(user, key, value)
 

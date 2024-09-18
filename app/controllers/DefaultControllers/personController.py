@@ -5,7 +5,7 @@ from app.schemas import PersonBase, PersonCreate
 
 
 async def create_person(db: AsyncSession, person: PersonBase):
-    db_person = Person(**person.dict())
+    db_person = Person(**person.model_dump())
     db.add(db_person)
     await db.commit()
     await db.refresh(db_person)
@@ -28,7 +28,7 @@ async def update_person(db: AsyncSession, person_id: int, updated_person: Person
     if person is None:
         return None
 
-    for key, value in updated_person.dict().items():
+    for key, value in updated_person.model_dump().items():
         if str(value):
             setattr(person, key, value)
 

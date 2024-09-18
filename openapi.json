@@ -3786,7 +3786,6 @@
                 },
                 "type": "object",
                 "required": [
-                    "id_emp",
                     "name",
                     "cpf",
                     "tel",

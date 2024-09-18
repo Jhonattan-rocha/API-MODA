@@ -9,7 +9,7 @@ from app.utils import apply_filters_dynamic
 
 
 async def create_product(db: AsyncSession, product: ProductBase):
-    db_product = Product(**product.dict())
+    db_product = Product(**product.model_dump())
     db.add(db_product)
     await db.commit()
     await db.refresh(db_product)
@@ -44,7 +44,7 @@ async def update_product(db: AsyncSession, product_id: int, updated_product: Pro
     if product is None:
         return None
 
-    for key, value in updated_product.dict().items():
+    for key, value in updated_product.model_dump().items():
         if str(value):
             setattr(product, key, value)
 

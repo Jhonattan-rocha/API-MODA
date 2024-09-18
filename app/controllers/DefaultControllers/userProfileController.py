@@ -7,7 +7,7 @@ from app.utils import apply_filters_dynamic
 
 
 async def create_user_profile(db: AsyncSession, user_profile: UserProfileBase):
-    db_user_profile = UserProfile(**user_profile.dict())
+    db_user_profile = UserProfile(**user_profile.model_dump())
     db.add(db_user_profile)
     await db.commit()
     await db.refresh(db_user_profile)
@@ -43,7 +43,7 @@ async def update_user_profile(db: AsyncSession, user_profile_id: int, updated_us
     if user_profile is None:
         return None
 
-    for key, value in updated_user_profile.dict().items():
+    for key, value in updated_user_profile.model_dump().items():
         if str(value):
             setattr(user_profile, key, value)
 

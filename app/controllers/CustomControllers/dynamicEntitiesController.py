@@ -6,7 +6,7 @@ from app.schemas import DynamicEntityCreate
 
 
 async def create_dynamic_entities(db: AsyncSession, dynamic_entity: DynamicEntityCreate):
-    db_dynamic_entity = DynamicEntity(**dynamic_entity.dict())
+    db_dynamic_entity = DynamicEntity(**dynamic_entity.model_dump())
     db.add(db_dynamic_entity)
     await db.commit()
     await db.refresh(db_dynamic_entity)
@@ -37,7 +37,7 @@ async def update_dynamic_entity(db: AsyncSession, dynamic_entity_id: int, update
     if dynamic_entity is None:
         return None
 
-    for key, value in updated_dynamic_entity.dict().items():
+    for key, value in updated_dynamic_entity.model_dump().items():
         setattr(dynamic_entity, key, value)
 
     await db.commit()

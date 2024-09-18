@@ -6,7 +6,7 @@ from app.schemas import DynamicFieldsCreate
 
 
 async def create_dynamic_fields(db: AsyncSession, dynamic_fields: DynamicFieldsCreate):
-    db_dynamic_fields = DynamicFields(**dynamic_fields.dict())
+    db_dynamic_fields = DynamicFields(**dynamic_fields.model_dump())
     db.add(db_dynamic_fields)
     await db.commit()
     await db.refresh(db_dynamic_fields)
@@ -37,7 +37,7 @@ async def update_dynamic_field(db: AsyncSession, dynamic_field_id: int, updated_
     if dynamic_field is None:
         return None
 
-    for key, value in updated_dynamic_field.dict().items():
+    for key, value in updated_dynamic_field.model_dump().items():
         setattr(dynamic_field, key, value)
 
     await db.commit()

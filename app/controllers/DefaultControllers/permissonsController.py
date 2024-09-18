@@ -6,7 +6,7 @@ from app.schemas import PermissionsBase, PermissionsCreate
 
 
 async def create_permissions(db: AsyncSession, permissions: PermissionsBase):
-    db_permissions = Permissions(**permissions.dict())
+    db_permissions = Permissions(**permissions.model_dump())
     db.add(db_permissions)
     await db.commit()
     await db.refresh(db_permissions)
@@ -37,7 +37,7 @@ async def update_permissions(db: AsyncSession, permissions_id: int, updated_perm
     if permissions is None:
         return None
 
-    for key, value in updated_permissions.dict().items():
+    for key, value in updated_permissions.model_dump().items():
         if str(value):
             setattr(permissions, key, value)
 

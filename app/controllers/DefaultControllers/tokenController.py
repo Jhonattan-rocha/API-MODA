@@ -1,6 +1,8 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta
+from sqlalchemy.orm import class_mapper
+from sqlalchemy.ext.declarative import DeclarativeMeta
 import jwt
 
 SECRET_KEY = "912839oahdoiashsda01723"

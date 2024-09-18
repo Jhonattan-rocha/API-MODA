@@ -6,7 +6,7 @@ from app.schemas import DynamicFieldToEntityValueCreate
 
 
 async def create_dynamic_field_value(db: AsyncSession, dynamic_field_value: DynamicFieldToEntityValueCreate):
-    db_dynamic_field_value = DynamicFieldToEntityValue(**dynamic_field_value.dict())
+    db_dynamic_field_value = DynamicFieldToEntityValue(**dynamic_field_value.model_dump())
     db.add(db_dynamic_field_value)
     await db.commit()
     await db.refresh(db_dynamic_field_value)
@@ -37,7 +37,7 @@ async def update_dynamic_field_value(db: AsyncSession, dynamic_field_value_id: i
     if dynamic_field_value is None:
         return None
 
-    for key, value in updated_dynamic_field_value.dict().items():
+    for key, value in updated_dynamic_field_value.model_dump().items():
         setattr(dynamic_field_value, key, value)
 
     await db.commit()

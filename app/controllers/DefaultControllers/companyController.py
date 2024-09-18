@@ -10,7 +10,7 @@ from app.utils import apply_filters_dynamic
 
 
 async def create_company(db: AsyncSession, company: CompanyBase):
-    db_company = Company(**company.dict())
+    db_company = Company(**company.model_dump())
     db.add(db_company)
     await db.commit()
     await db.refresh(db_company)
@@ -43,7 +43,7 @@ async def update_company(db: AsyncSession, company_id: int, updated_company: Com
     if company is None:
         return None
 
-    for key, value in updated_company.dict().items():
+    for key, value in updated_company.model_dump().items():
         if str(value):
             setattr(company, key, value)
 

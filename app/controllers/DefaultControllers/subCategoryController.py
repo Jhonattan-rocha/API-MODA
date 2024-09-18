@@ -9,7 +9,7 @@ from app.utils import apply_filters_dynamic
 
 
 async def create_subcategory(db: AsyncSession, subcategory: SubCategoryBase):
-    db_subcategory = SubCategory(**subcategory.dict())
+    db_subcategory = SubCategory(**subcategory.model_dump())
     db.add(db_subcategory)
     await db.commit()
     await db.refresh(db_subcategory)
@@ -45,7 +45,7 @@ async def update_category(db: AsyncSession, subcategory_id: int, updated_subcate
     if subcategory is None:
         return None
 
-    for key, value in updated_subcategory.dict().items():
+    for key, value in updated_subcategory.model_dump().items():
         if str(value):
             setattr(subcategory, key, value)
 

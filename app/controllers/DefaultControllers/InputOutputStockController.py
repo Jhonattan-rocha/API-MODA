@@ -5,7 +5,7 @@ from app.schemas import InputOutputStockBase, InputOutputStockCreate
 
 
 async def create_input_output_stock(db: AsyncSession, input_output_stock: InputOutputStockBase):
-    db_input_output_stock = InputOutputStock(**input_output_stock.dict())
+    db_input_output_stock = InputOutputStock(**input_output_stock.model_dump())
     db.add(db_input_output_stock)
     await db.commit()
     await db.refresh(db_input_output_stock)
@@ -34,7 +34,7 @@ async def update_input_output_stock(db: AsyncSession, input_output_stock_id: int
     if input_output_stock is None:
         return None
 
-    for key, value in updated_input_output_stock.dict().items():
+    for key, value in updated_input_output_stock.model_dump().items():
         if str(value):
             setattr(input_output_stock, key, value)
 

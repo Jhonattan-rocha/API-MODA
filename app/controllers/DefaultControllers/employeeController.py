@@ -8,7 +8,7 @@ from app.utils import apply_filters_dynamic
 
 
 async def create_employee(db: AsyncSession, employee: EmployeesBase):
-    db_employee = Employees(**employee.dict())
+    db_employee = Employees(**employee.model_dump())
     db.add(db_employee)
     await db.commit()
     await db.refresh(db_employee)
@@ -40,7 +40,9 @@ async def update_employee(db: AsyncSession, employee_id: int, updated_employee: 
     if employee is None:
         return None
 
-    for key, value in updated_employee.dict().items():
+    print('update employees')
+    for key, value in updated_employee.model_dump().items():
+        print(key, value)
         if str(value):
             setattr(employee, key, value)
 

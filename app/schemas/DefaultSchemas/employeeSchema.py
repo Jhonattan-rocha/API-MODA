@@ -27,6 +27,7 @@ class EmployeesBase(BaseModel):
 
 class EmployeesCreate(EmployeesBase):
     id: int
+    id_emp: int = None
 
 
 class Employees(EmployeesBase):
