@@ -1,6 +1,6 @@
 from app.models.CustomModels import (PersonToCustomEntity, UserToCustomEntity, CompanyToCustomEntity,
                                      ProductToCustomEntity, CategoryToCustomEntity, EmployeeToCustomEntity,
-                                     SubCategoryToCustomEntity, CustomEntityToCustomEntity)
+                                     SubCategoryToCustomEntity, CustomEntityToCustomEntity, DynamicEntity, DynamicFields, DynamicFieldToEntityValue)
 from app.models.DefaultModels import (User, UserProfile, Permissions, SubCategory, InputOutputStock, Company, Category,
                                       Employees, Product, Person, ProductCategory)
 from app.database import Base
@@ -24,7 +24,10 @@ models_mapping: dict[str, Base] = {
     "Product": Product,
     "Person": Person,
     "ProductCategory": ProductCategory,
-    "CustomEntityToCustomEntity": CustomEntityToCustomEntity
+    "CustomEntityToCustomEntity": CustomEntityToCustomEntity,
+    "DynamicEntity": DynamicEntity,
+    "DynamicFields": DynamicFields,
+    "DynamicFieldToEntityValue": DynamicFieldToEntityValue
 }
 
 models_fields_mapping: dict[str, Base] = {

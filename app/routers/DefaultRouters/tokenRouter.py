@@ -44,8 +44,8 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSessi
         )
         generic_controller = GenericController("ProductCategory")
         return {"access_token": access_token, "token_type": "bearer", "user": {"id": user.id, "email": user.email,
-                                                                               "username": user.name, "lang": user.lang,
-                                                                               "profile": generic_controller.serialize_item(user.profile)}}
+                                                                               "name": user.name, "lang": user.lang,
+                                                                               "profile": generic_controller.serialize_item(user.profile) if user.profile else user.profile}}
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
         detail="Incorrect username or password, user not found",

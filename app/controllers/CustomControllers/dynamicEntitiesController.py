@@ -3,6 +3,8 @@ from sqlalchemy.future import select
 from sqlalchemy.orm import joinedload
 from app.models import DynamicEntity, DynamicFields
 from app.schemas import DynamicEntityCreate
+from app.utils import apply_filters_dynamic
+from typing import Optional, List
 
 
 async def create_dynamic_entities(db: AsyncSession, dynamic_entity: DynamicEntityCreate):
@@ -13,11 +15,16 @@ async def create_dynamic_entities(db: AsyncSession, dynamic_entity: DynamicEntit
     return db_dynamic_entity
 
 
-async def get_dynamic_entities(db: AsyncSession, skip: int = 0, limit: int = 10):
+async def get_dynamic_entities(db: AsyncSession, skip: int = 0, limit: int = 10, filters: Optional[List[str]] = None,
+                               model: str = ""):
+    query = select(DynamicEntity)
+
+    if filters and model:
+        query = apply_filters_dynamic(query, filters, model)
     result = await db.execute(
-        select(DynamicEntity)
+        query
         .options(joinedload(DynamicEntity.fields).joinedload(DynamicFields.values))
-        .offset(skip).limit(limit)
+        .offset(skip).limit(limit if limit > 0 else None)
     )
     return result.scalars().unique().all()
 

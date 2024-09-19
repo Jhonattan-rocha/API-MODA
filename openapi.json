@@ -1343,6 +1343,11 @@
             "post": {
                 "summary": "Create Dynamic Entity",
                 "operationId": "create_dynamic_entity_crud_dynamic_entities_post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1379,7 +1384,21 @@
             "get": {
                 "summary": "Read Dynamic Entities",
                 "operationId": "read_dynamic_entities_crud_dynamic_entities_get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
+                    {
+                        "name": "filters",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "title": "Filters"
+                        }
+                    },
                     {
                         "name": "skip",
                         "in": "query",
@@ -1433,6 +1452,11 @@
             "get": {
                 "summary": "Read Dynamic Entity",
                 "operationId": "read_dynamic_entity_crud_dynamic_entities__product_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "dynamic_entity_id",
@@ -1470,6 +1494,11 @@
             "put": {
                 "summary": "Update Dynamic Entity",
                 "operationId": "update_dynamic_entity_crud_dynamic_entities__product_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "dynamic_entity_id",
@@ -1517,6 +1546,11 @@
             "delete": {
                 "summary": "Delete Dynamic Entity",
                 "operationId": "delete_dynamic_entity_crud_dynamic_entities__product_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "dynamic_entity_id",
