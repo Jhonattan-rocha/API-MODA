@@ -27,9 +27,9 @@ async def read_dynamic_field(dynamic_field_value_id: int, db: AsyncSession = Dep
 
 
 @router.put("/dynamic_fields_values/{dynamic_field_value_id}",
-            response_model=dynamicFiledsValueSchema.DynamicFieldToEntityValue)
+            response_model=dynamicFiledsValueSchema.DynamicFieldToEntityValueCreate)
 async def update_dynamic_field(dynamic_field_value_id: int,
-                               updated_dynamic_field_value: dynamicFiledsValueSchema.DynamicFieldToEntityValue,
+                               updated_dynamic_field_value: dynamicFiledsValueSchema.DynamicFieldToEntityValueCreate,
                                db: AsyncSession = Depends(database.get_db)):
     return await dynamic_fields_values_controller.update_dynamic_field_value(
         dynamic_field_value_id=dynamic_field_value_id,

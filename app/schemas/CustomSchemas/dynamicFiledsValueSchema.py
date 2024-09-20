@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import List, Optional
-
+from app.schemas.CustomSchemas.dynamicFields import DynamicFields
 
 class DynamicFieldToEntityValueBase(BaseModel):
     entity_id: int
@@ -15,6 +15,7 @@ class DynamicFieldToEntityValueCreate(DynamicFieldToEntityValueBase):
 
 class DynamicFieldToEntityValue(DynamicFieldToEntityValueBase):
     id: int
+    field: Optional["DynamicFields"]
 
     class Config:
         orm_mode: True

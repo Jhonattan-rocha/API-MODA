@@ -1428,7 +1428,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/DynamicEntity-Output"
+                                        "$ref": "#/components/schemas/DynamicEntity"
                                     },
                                     "title": "Response Read Dynamic Entities Crud Dynamic Entities Get"
                                 }
@@ -1448,10 +1448,10 @@
                 }
             }
         },
-        "/crud/dynamic_entities/{product_id}": {
+        "/crud/dynamic_entities/{dynamic_entity_id}": {
             "get": {
                 "summary": "Read Dynamic Entity",
-                "operationId": "read_dynamic_entity_crud_dynamic_entities__product_id__get",
+                "operationId": "read_dynamic_entity_crud_dynamic_entities__dynamic_entity_id__get",
                 "security": [
                     {
                         "OAuth2PasswordBearer": []
@@ -1460,7 +1460,7 @@
                 "parameters": [
                     {
                         "name": "dynamic_entity_id",
-                        "in": "query",
+                        "in": "path",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1474,7 +1474,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/DynamicEntity-Output"
+                                    "$ref": "#/components/schemas/DynamicEntity"
                                 }
                             }
                         }
@@ -1493,7 +1493,7 @@
             },
             "put": {
                 "summary": "Update Dynamic Entity",
-                "operationId": "update_dynamic_entity_crud_dynamic_entities__product_id__put",
+                "operationId": "update_dynamic_entity_crud_dynamic_entities__dynamic_entity_id__put",
                 "security": [
                     {
                         "OAuth2PasswordBearer": []
@@ -1502,7 +1502,7 @@
                 "parameters": [
                     {
                         "name": "dynamic_entity_id",
-                        "in": "query",
+                        "in": "path",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1515,7 +1515,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/DynamicEntity-Input"
+                                "$ref": "#/components/schemas/DynamicEntityCreate"
                             }
                         }
                     }
@@ -1526,7 +1526,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/DynamicEntity-Output"
+                                    "$ref": "#/components/schemas/DynamicEntityCreate"
                                 }
                             }
                         }
@@ -1545,7 +1545,7 @@
             },
             "delete": {
                 "summary": "Delete Dynamic Entity",
-                "operationId": "delete_dynamic_entity_crud_dynamic_entities__product_id__delete",
+                "operationId": "delete_dynamic_entity_crud_dynamic_entities__dynamic_entity_id__delete",
                 "security": [
                     {
                         "OAuth2PasswordBearer": []
@@ -1554,7 +1554,7 @@
                 "parameters": [
                     {
                         "name": "dynamic_entity_id",
-                        "in": "query",
+                        "in": "path",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1588,6 +1588,11 @@
             "post": {
                 "summary": "Create Dynamic Field",
                 "operationId": "create_dynamic_field_crud_dynamic_fields_post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1624,7 +1629,21 @@
             "get": {
                 "summary": "Read Dynamic Fields",
                 "operationId": "read_dynamic_fields_crud_dynamic_fields_get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
+                    {
+                        "name": "filters",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "title": "Filters"
+                        }
+                    },
                     {
                         "name": "skip",
                         "in": "query",
@@ -1678,6 +1697,11 @@
             "get": {
                 "summary": "Read Dynamic Field",
                 "operationId": "read_dynamic_field_crud_dynamic_fields__dynamic_field_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "dynamic_field_id",
@@ -1715,6 +1739,11 @@
             "put": {
                 "summary": "Update Dynamic Field",
                 "operationId": "update_dynamic_field_crud_dynamic_fields__dynamic_field_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "dynamic_field_id",
@@ -1731,7 +1760,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/DynamicFields"
+                                "$ref": "#/components/schemas/DynamicFieldsCreate"
                             }
                         }
                     }
@@ -1742,7 +1771,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/DynamicFields"
+                                    "$ref": "#/components/schemas/DynamicFieldsCreate"
                                 }
                             }
                         }
@@ -1762,6 +1791,11 @@
             "delete": {
                 "summary": "Delete Dynamic Field",
                 "operationId": "delete_dynamic_field_crud_dynamic_fields__dynamic_field_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "dynamic_field_id",
@@ -1942,7 +1976,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/DynamicFieldToEntityValue"
+                                "$ref": "#/components/schemas/DynamicFieldToEntityValueCreate"
                             }
                         }
                     }
@@ -1953,7 +1987,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/DynamicFieldToEntityValue"
+                                    "$ref": "#/components/schemas/DynamicFieldToEntityValueCreate"
                                 }
                             }
                         }
@@ -3500,40 +3534,7 @@
                 ],
                 "title": "CompanyCreate"
             },
-            "DynamicEntity-Input": {
-                "properties": {
-                    "entity_name": {
-                        "type": "string",
-                        "title": "Entity Name"
-                    },
-                    "id": {
-                        "type": "integer",
-                        "title": "Id"
-                    },
-                    "fields": {
-                        "items": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/components/schemas/DynamicFields"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ]
-                        },
-                        "type": "array",
-                        "title": "Fields"
-                    }
-                },
-                "type": "object",
-                "required": [
-                    "entity_name",
-                    "id",
-                    "fields"
-                ],
-                "title": "DynamicEntity"
-            },
-            "DynamicEntity-Output": {
+            "DynamicEntity": {
                 "properties": {
                     "entity_name": {
                         "type": "string",
@@ -3600,6 +3601,16 @@
                     "id": {
                         "type": "integer",
                         "title": "Id"
+                    },
+                    "field": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DynamicFields"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     }
                 },
                 "type": "object",
@@ -3608,7 +3619,8 @@
                     "entity_id_instance",
                     "field_id",
                     "value",
-                    "id"
+                    "id",
+                    "field"
                 ],
                 "title": "DynamicFieldToEntityValue"
             },
@@ -3657,20 +3669,6 @@
                     "id": {
                         "type": "integer",
                         "title": "Id"
-                    },
-                    "values": {
-                        "items": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/components/schemas/DynamicFieldToEntityValue"
-                                },
-                                {
-                                    "type": "null"
-                                }
-                            ]
-                        },
-                        "type": "array",
-                        "title": "Values"
                     }
                 },
                 "type": "object",
@@ -3678,8 +3676,7 @@
                     "field_name",
                     "type_value",
                     "entity_id",
-                    "id",
-                    "values"
+                    "id"
                 ],
                 "title": "DynamicFields"
             },

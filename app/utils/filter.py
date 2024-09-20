@@ -53,11 +53,11 @@ def apply_filters_dynamic(query, filters, model):
             elif operator == "ge":  # greater than or equal to
                 conditions.append(column >= value)
             elif operator == "ct":  # contains
-                conditions.append(func.lower(column).like(f"%{value}%"))
+                conditions.append(func.lower(column).like(f"%{value}%".lower()))
             elif operator == "sw":  # starts with
-                conditions.append(func.lower(column).like(f"{value}%"))
+                conditions.append(func.lower(column).like(f"{value}%".lower()))
             elif operator == "ew":  # ends with
-                conditions.append(func.lower(column).like(f"%{value}"))
+                conditions.append(func.lower(column).like(f"%{value}".lower()))
         if len(aux) == 2:
             constraint, column = aux
 

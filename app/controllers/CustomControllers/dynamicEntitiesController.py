@@ -13,7 +13,7 @@ async def create_dynamic_entities(db: AsyncSession, dynamic_entity: DynamicEntit
     await db.commit()
     await db.refresh(db_dynamic_entity)
     return db_dynamic_entity
-
+ 
 
 async def get_dynamic_entities(db: AsyncSession, skip: int = 0, limit: int = 10, filters: Optional[List[str]] = None,
                                model: str = ""):
@@ -23,7 +23,7 @@ async def get_dynamic_entities(db: AsyncSession, skip: int = 0, limit: int = 10,
         query = apply_filters_dynamic(query, filters, model)
     result = await db.execute(
         query
-        .options(joinedload(DynamicEntity.fields).joinedload(DynamicFields.values))
+        .options(joinedload(DynamicEntity.fields))
         .offset(skip).limit(limit if limit > 0 else None)
     )
     return result.scalars().unique().all()
@@ -32,13 +32,13 @@ async def get_dynamic_entities(db: AsyncSession, skip: int = 0, limit: int = 10,
 async def get_dynamic_entity(db: AsyncSession, dynamic_entity_id: int):
     result = await db.execute(
         select(DynamicEntity)
-        .options(joinedload(DynamicEntity.fields).joinedload(DynamicFields.values))
+        .options(joinedload(DynamicEntity.fields))
         .where(DynamicEntity.id == dynamic_entity_id)
     )
     return result.scalars().unique().first()
 
 
-async def update_dynamic_entity(db: AsyncSession, dynamic_entity_id: int, updated_dynamic_entity: DynamicEntity):
+async def update_dynamic_entity(db: AsyncSession, dynamic_entity_id: int, updated_dynamic_entity: DynamicEntityCreate):
     result = await db.execute(select(DynamicEntity).where(DynamicEntity.id == dynamic_entity_id))
     dynamic_entity = result.scalars().first()
     if dynamic_entity is None:

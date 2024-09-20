@@ -31,7 +31,7 @@ async def get_dynamic_field_value(db: AsyncSession, dynamic_field_value_id: int)
     return result.scalars().unique().first()
 
 
-async def update_dynamic_field_value(db: AsyncSession, dynamic_field_value_id: int, updated_dynamic_field_value: DynamicFieldToEntityValue):
+async def update_dynamic_field_value(db: AsyncSession, dynamic_field_value_id: int, updated_dynamic_field_value: DynamicFieldToEntityValueCreate):
     result = await db.execute(select(DynamicFieldToEntityValue).where(DynamicFieldToEntityValue.id == dynamic_field_value_id))
     dynamic_field_value = result.scalars().first()
     if dynamic_field_value is None:

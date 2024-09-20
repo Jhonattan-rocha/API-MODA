@@ -1,6 +1,4 @@
 from pydantic import BaseModel
-from typing import List, Optional
-from app.schemas.CustomSchemas.dynamicFiledsValueSchema import DynamicFieldToEntityValue
 
 
 class DynamicFieldsBase(BaseModel):
@@ -15,7 +13,6 @@ class DynamicFieldsCreate(DynamicFieldsBase):
 
 class DynamicFields(DynamicFieldsBase):
     id: int
-    values: List[Optional["DynamicFieldToEntityValue"]]
 
     class Config:
         orm_mode: True

@@ -12,4 +12,4 @@ class DynamicFieldToEntityValue(Base):
     field_id = Column(Integer, ForeignKey('dynamic_fields.id'), nullable=False)
     value = Column(String(255), nullable=True)
 
-    field = relationship("DynamicFields", back_populates="values", foreign_keys="DynamicFieldToEntityValue.field_id")
+    field = relationship("DynamicFields", foreign_keys="DynamicFieldToEntityValue.field_id")

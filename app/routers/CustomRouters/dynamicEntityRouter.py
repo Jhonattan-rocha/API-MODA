@@ -20,18 +20,18 @@ async def read_dynamic_entities(filters: str = None, skip: int = 0, limit: int =
     return await dynamic_entities_controller.get_dynamic_entities(skip=skip, limit=limit, db=db, filters=filters, model="DynamicEntity")
 
 
-@router.get("/dynamic_entities/{product_id}", response_model=dynamicEntities.DynamicEntity)
+@router.get("/dynamic_entities/{dynamic_entity_id}", response_model=dynamicEntities.DynamicEntity)
 async def read_dynamic_entity(dynamic_entity_id: int, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await dynamic_entities_controller.get_dynamic_entity(dynamic_entity_id=dynamic_entity_id, db=db)
 
 
-@router.put("/dynamic_entities/{product_id}", response_model=dynamicEntities.DynamicEntity)
-async def update_dynamic_entity(dynamic_entity_id: int, updated_dynamic_entity: dynamicEntities.DynamicEntity,
+@router.put("/dynamic_entities/{dynamic_entity_id}", response_model=dynamicEntities.DynamicEntityCreate)
+async def update_dynamic_entity(dynamic_entity_id: int, updated_dynamic_entity: dynamicEntities.DynamicEntityCreate,
                                 db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await dynamic_entities_controller.update_dynamic_entity(dynamic_entity_id=dynamic_entity_id,
                                                                    updated_dynamic_entity=updated_dynamic_entity, db=db)
 
 
-@router.delete("/dynamic_entities/{product_id}")
+@router.delete("/dynamic_entities/{dynamic_entity_id}")
 async def delete_dynamic_entity(dynamic_entity_id: int, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await dynamic_entities_controller.delete_dynamic_entity(dynamic_entity_id=dynamic_entity_id, db=db)
