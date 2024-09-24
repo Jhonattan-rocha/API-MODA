@@ -11,4 +11,3 @@ class InputOutputStock(Base):
     type = Column(String(1), index=True, nullable=False)
     qtd = Column(Float, nullable=False)
     date = Column(DateTime, nullable=False, default=datetime.now())
-    product_custom_entity_id = Column(Integer, ForeignKey('product_to_custom_entity.id'), nullable=False)

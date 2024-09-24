@@ -3835,13 +3835,11 @@
                     },
                     "model": {
                         "type": "string",
-                        "title": "Model"
+                        "title": "Model",
+                        "default": ""
                     }
                 },
                 "type": "object",
-                "required": [
-                    "model"
-                ],
                 "title": "GenericCreate"
             },
             "HTTPValidationError": {

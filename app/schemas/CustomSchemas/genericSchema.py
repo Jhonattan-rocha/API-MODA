@@ -6,12 +6,12 @@ class GenericBase(BaseModel):
 
 
 class GenericCreate(GenericBase):
-    model: str
+    model: str = ""
 
 
 class Generic(GenericBase):
     id: int
-    model: str
+    model: str = ""
 
     class Config:
         orm_mode: True
