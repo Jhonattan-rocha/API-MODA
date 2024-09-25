@@ -11,3 +11,4 @@ class InputOutputStock(Base):
     type = Column(String(1), index=True, nullable=False)
     qtd = Column(Float, nullable=False)
     date = Column(DateTime, nullable=False, default=datetime.now())
+    product_id = Column(Integer, ForeignKey('user_profile.id'), nullable=False)

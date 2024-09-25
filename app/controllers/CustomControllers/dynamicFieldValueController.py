@@ -1,8 +1,10 @@
+from typing import List, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import joinedload
 from app.models import DynamicFieldToEntityValue
 from app.schemas import DynamicFieldToEntityValueCreate
+from app.utils import apply_filters_dynamic
 
 
 async def create_dynamic_field_value(db: AsyncSession, dynamic_field_value: DynamicFieldToEntityValueCreate):
@@ -13,11 +15,17 @@ async def create_dynamic_field_value(db: AsyncSession, dynamic_field_value: Dyna
     return db_dynamic_field_value
 
 
-async def get_dynamic_fields_values(db: AsyncSession, skip: int = 0, limit: int = 10):
+async def get_dynamic_fields_values(db: AsyncSession, skip: int = 0, limit: int = 10, filters: Optional[List[str]] = None,
+                                    model: str = ""):
+    query = select(DynamicFieldToEntityValue)
+
+    if filters and model:
+        query = apply_filters_dynamic(query, filters, model)
     result = await db.execute(
-        select(DynamicFieldToEntityValue)
+        query
         .options(joinedload(DynamicFieldToEntityValue.field))
-        .offset(skip).limit(limit)
+        .offset(skip)
+        .limit(limit if limit > 0 else None)
     )
     return result.scalars().unique().all()
 

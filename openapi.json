@@ -1833,6 +1833,11 @@
             "post": {
                 "summary": "Create Dynamic Field Value",
                 "operationId": "create_dynamic_field_value_crud_dynamic_fields_values_post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1869,7 +1874,21 @@
             "get": {
                 "summary": "Read Dynamic Fields",
                 "operationId": "read_dynamic_fields_crud_dynamic_fields_values_get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
+                    {
+                        "name": "filters",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "title": "Filters"
+                        }
+                    },
                     {
                         "name": "skip",
                         "in": "query",
@@ -1923,6 +1942,11 @@
             "get": {
                 "summary": "Read Dynamic Field",
                 "operationId": "read_dynamic_field_crud_dynamic_fields_values__dynamic_field_value_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "dynamic_field_value_id",
@@ -1960,6 +1984,11 @@
             "put": {
                 "summary": "Update Dynamic Field",
                 "operationId": "update_dynamic_field_crud_dynamic_fields_values__dynamic_field_value_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "dynamic_field_value_id",
@@ -2007,6 +2036,11 @@
             "delete": {
                 "summary": "Delete Dynamic Field Value",
                 "operationId": "delete_dynamic_field_value_crud_dynamic_fields_values__dynamic_field_value_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "dynamic_field_value_id",
