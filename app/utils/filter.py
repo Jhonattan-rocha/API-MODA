@@ -58,6 +58,8 @@ def apply_filters_dynamic(query, filters, model):
                 conditions.append(func.lower(column).like(f"{value}%".lower()))
             elif operator == "ew":  # ends with
                 conditions.append(func.lower(column).like(f"%{value}".lower()))
+            elif operator == "in":
+                conditions.append(column.in_([int(val) for val in str(value).split(',')]))
         if len(aux) == 2:
             constraint, column = aux
 

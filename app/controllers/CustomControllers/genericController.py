@@ -36,7 +36,7 @@ class GenericController:
         result = await db.execute(
             query
             .offset(skip)
-            .limit(limit)
+            .limit(limit if limit > 0 else None)
         )
         return result.scalars().unique().all()
 
