@@ -10,7 +10,7 @@ router = APIRouter(prefix="/crud")
 
 
 @router.post("/products", response_model=productSchema.ProductCreate)
-async def create_product(product: productSchema.ProductBase, db: AsyncSession = Depends(database.get_db)):
+async def create_product(product: productSchema.ProductBase, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await product_controller.create_product(product=product, db=db)
 
 
@@ -22,16 +22,16 @@ async def read_products(filters: str = None, skip: int = 0, limit: int = 10,
 
 
 @router.get("/products/{product_id}", response_model=productSchema.Product)
-async def read_product(product_id: int, db: AsyncSession = Depends(database.get_db)):
+async def read_product(product_id: int, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await product_controller.get_product(product_id=product_id, db=db)
 
 
 @router.put("/products/{product_id}", response_model=productSchema.ProductCreate)
 async def update_product(product_id: int, updated_product: productSchema.ProductCreate,
-                         db: AsyncSession = Depends(database.get_db)):
+                         db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await product_controller.update_product(product_id=product_id, updated_product=updated_product, db=db)
 
 
 @router.delete("/products/{product_id}")
-async def delete_product(product_id: int, db: AsyncSession = Depends(database.get_db)):
+async def delete_product(product_id: int, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await product_controller.delete_product(product_id=product_id, db=db)

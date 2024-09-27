@@ -3,13 +3,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.controllers.CustomControllers import GenericController, models_mapping
 from app.database import database, Base
 from app.schemas.CustomSchemas import genericSchema
+from app.controllers import verify_token
 
 router = APIRouter(prefix="/crud")
 
 
 @router.post("/generic", response_model=genericSchema.GenericCreate)
 async def generic_create(generic: genericSchema.GenericCreate,
-                         db: AsyncSession = Depends(database.get_db), model: str = ""):
+                         db: AsyncSession = Depends(database.get_db), model: str = "", validation: str = Depends(verify_token)):
     if model not in models_mapping.keys():
         raise HTTPException(status_code=400, detail="Invalid model name provided")
 
@@ -26,7 +27,7 @@ async def generic_create(generic: genericSchema.GenericCreate,
 
 @router.get("/generic", response_model=list[genericSchema.GenericCreate])
 async def generic_reads(skip: int = 0, limit: int = 10, model: str = "",
-                        db: AsyncSession = Depends(database.get_db), filters: str = None):
+                        db: AsyncSession = Depends(database.get_db), filters: str = None, validation: str = Depends(verify_token)):
     if model not in models_mapping.keys():
         raise HTTPException(status_code=400, detail="Invalid model name provided")
 
@@ -41,7 +42,7 @@ async def generic_reads(skip: int = 0, limit: int = 10, model: str = "",
 
 @router.get("/generic/{generic_id}",
             response_model=genericSchema.GenericCreate)
-async def generic_read(generic_id: int, model: str = "", db: AsyncSession = Depends(database.get_db)):
+async def generic_read(generic_id: int, model: str = "", db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     if model not in models_mapping.keys():
         raise HTTPException(status_code=400, detail="Invalid model name provided")
 
@@ -59,7 +60,7 @@ async def generic_read(generic_id: int, model: str = "", db: AsyncSession = Depe
 async def generic_update(generic_id: int,
                          model: str,
                          updated_generic: genericSchema.GenericCreate,
-                         db: AsyncSession = Depends(database.get_db)):
+                         db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     if model not in models_mapping.keys():
         raise HTTPException(status_code=400, detail="Invalid model name provided")
 
@@ -71,7 +72,7 @@ async def generic_update(generic_id: int,
 
 
 @router.delete("/generic/{generic_id}", response_model=genericSchema.GenericCreate)
-async def generic_delete(generic_id: int, model: str, db: AsyncSession = Depends(database.get_db)):
+async def generic_delete(generic_id: int, model: str, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     if model not in models_mapping.keys():
         raise HTTPException(status_code=400, detail="Invalid model name provided")
 

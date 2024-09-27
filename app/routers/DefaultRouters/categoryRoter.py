@@ -10,7 +10,7 @@ router = APIRouter(prefix="/crud")
 
 
 @router.post("/categories/", response_model=categorySchema.CategoryCreate)
-async def create_category(category: categorySchema.CategoryBase, db: AsyncSession = Depends(database.get_db)):
+async def create_category(category: categorySchema.CategoryBase, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await category_controller.create_category(category=category, db=db)
 
 
@@ -22,16 +22,16 @@ async def read_categories(filters: str = None, skip: int = 0, limit: int = 10,
 
 
 @router.get("/categories/{category_id}", response_model=categorySchema.Category)
-async def read_category(category_id: int, db: AsyncSession = Depends(database.get_db)):
+async def read_category(category_id: int, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await category_controller.get_category(category_id=category_id, db=db)
 
 
 @router.put("/categories/{category_id}", response_model=categorySchema.CategoryCreate)
 async def update_category(category_id: int, updated_category: categorySchema.CategoryCreate,
-                          db: AsyncSession = Depends(database.get_db)):
+                          db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await category_controller.update_category(category_id=category_id, updated_category=updated_category, db=db)
 
 
 @router.delete("/categories/{category_id}")
-async def delete_category(category_id: int, db: AsyncSession = Depends(database.get_db)):
+async def delete_category(category_id: int, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await category_controller.delete_category(category_id=category_id, db=db)

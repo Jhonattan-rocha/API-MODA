@@ -21,6 +21,11 @@
             "post": {
                 "summary": "Create Category",
                 "operationId": "create_category_crud_categories__post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -125,6 +130,11 @@
             "get": {
                 "summary": "Read Category",
                 "operationId": "read_category_crud_categories__category_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "category_id",
@@ -162,6 +172,11 @@
             "put": {
                 "summary": "Update Category",
                 "operationId": "update_category_crud_categories__category_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "category_id",
@@ -209,6 +224,11 @@
             "delete": {
                 "summary": "Delete Category",
                 "operationId": "delete_category_crud_categories__category_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "category_id",
@@ -246,6 +266,11 @@
             "post": {
                 "summary": "Create Product",
                 "operationId": "create_product_crud_products_post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -350,6 +375,11 @@
             "get": {
                 "summary": "Read Product",
                 "operationId": "read_product_crud_products__product_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "product_id",
@@ -387,6 +417,11 @@
             "put": {
                 "summary": "Update Product",
                 "operationId": "update_product_crud_products__product_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "product_id",
@@ -434,6 +469,11 @@
             "delete": {
                 "summary": "Delete Product",
                 "operationId": "delete_product_crud_products__product_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "product_id",
@@ -471,6 +511,11 @@
             "post": {
                 "summary": "Create Product",
                 "operationId": "create_product_crud_product_categories_post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -507,6 +552,11 @@
             "get": {
                 "summary": "Read Products",
                 "operationId": "read_products_crud_product_categories_get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "skip",
@@ -561,6 +611,11 @@
             "get": {
                 "summary": "Read Product",
                 "operationId": "read_product_crud_product_categories__product_category_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "product_category_id",
@@ -598,6 +653,11 @@
             "put": {
                 "summary": "Update Product",
                 "operationId": "update_product_crud_product_categories__product_category_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "product_category_id",
@@ -645,6 +705,11 @@
             "delete": {
                 "summary": "Delete Product",
                 "operationId": "delete_product_crud_product_categories__product_category_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "product_category_id",
@@ -682,6 +747,11 @@
             "post": {
                 "summary": "Create Subcategory",
                 "operationId": "create_subcategory_crud_subcategories__post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -786,6 +856,11 @@
             "get": {
                 "summary": "Read Subcategory",
                 "operationId": "read_subcategory_crud_subcategories__subcategory_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "subcategory_id",
@@ -823,6 +898,11 @@
             "put": {
                 "summary": "Update Subcategory",
                 "operationId": "update_subcategory_crud_subcategories__subcategory_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "subcategory_id",
@@ -870,6 +950,11 @@
             "delete": {
                 "summary": "Delete Subcategory",
                 "operationId": "delete_subcategory_crud_subcategories__subcategory_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "subcategory_id",
@@ -907,6 +992,11 @@
             "post": {
                 "summary": "Create People",
                 "operationId": "create_people_crud_people_post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -943,6 +1033,11 @@
             "get": {
                 "summary": "Read People",
                 "operationId": "read_people_crud_people_get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "skip",
@@ -997,6 +1092,11 @@
             "get": {
                 "summary": "Read People",
                 "operationId": "read_people_crud_people__person_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "person_id",
@@ -1034,6 +1134,11 @@
             "put": {
                 "summary": "Update People",
                 "operationId": "update_people_crud_people__person_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "person_id",
@@ -1081,6 +1186,11 @@
             "delete": {
                 "summary": "Delete People",
                 "operationId": "delete_people_crud_people__person_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "person_id",
@@ -1118,6 +1228,11 @@
             "post": {
                 "summary": "Create Company",
                 "operationId": "create_company_crud_companies_post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1222,6 +1337,11 @@
             "get": {
                 "summary": "Read Company",
                 "operationId": "read_company_crud_companies__company_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "company_id",
@@ -1259,6 +1379,11 @@
             "put": {
                 "summary": "Update Company",
                 "operationId": "update_company_crud_companies__company_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "company_id",
@@ -1306,6 +1431,11 @@
             "delete": {
                 "summary": "Delete Company",
                 "operationId": "delete_company_crud_companies__company_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "company_id",
@@ -2078,6 +2208,11 @@
             "post": {
                 "summary": "Generic Create",
                 "operationId": "generic_create_crud_generic_post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "model",
@@ -2126,6 +2261,11 @@
             "get": {
                 "summary": "Generic Reads",
                 "operationId": "generic_reads_crud_generic_get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "skip",
@@ -2199,6 +2339,11 @@
             "get": {
                 "summary": "Generic Read",
                 "operationId": "generic_read_crud_generic__generic_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "generic_id",
@@ -2246,6 +2391,11 @@
             "put": {
                 "summary": "Generic Update",
                 "operationId": "generic_update_crud_generic__generic_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "generic_id",
@@ -2302,6 +2452,11 @@
             "delete": {
                 "summary": "Generic Delete",
                 "operationId": "generic_delete_crud_generic__generic_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "generic_id",
@@ -2835,6 +2990,11 @@
             "post": {
                 "summary": "Create Permission",
                 "operationId": "create_permission_crud_permissions__post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -2871,6 +3031,11 @@
             "get": {
                 "summary": "Read Permissions",
                 "operationId": "read_permissions_crud_permissions__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "skip",
@@ -2925,6 +3090,11 @@
             "get": {
                 "summary": "Read Permission",
                 "operationId": "read_permission_crud_permissions__permission_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "permission_id",
@@ -2962,6 +3132,11 @@
             "put": {
                 "summary": "Update Permission",
                 "operationId": "update_permission_crud_permissions__permission_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "permission_id",
@@ -3009,6 +3184,11 @@
             "delete": {
                 "summary": "Delete Permission",
                 "operationId": "delete_permission_crud_permissions__permission_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "permission_id",
@@ -3046,6 +3226,11 @@
             "post": {
                 "summary": "Create Employee",
                 "operationId": "create_employee_crud_employees_post",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -3150,6 +3335,11 @@
             "get": {
                 "summary": "Read Employee",
                 "operationId": "read_employee_crud_employees__employee_id__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "employee_id",
@@ -3187,6 +3377,11 @@
             "put": {
                 "summary": "Update Employee",
                 "operationId": "update_employee_crud_employees__employee_id__put",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "employee_id",
@@ -3234,6 +3429,11 @@
             "delete": {
                 "summary": "Delete Employee",
                 "operationId": "delete_employee_crud_employees__employee_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "employee_id",
