@@ -1,6 +1,6 @@
 from app.Mapping import models_mapping
 from sqlalchemy.types import Integer, String, Float, Boolean, Date, DateTime
-from sqlalchemy import and_, func
+from sqlalchemy import and_, func, Column
 
 
 def convert_to_column_type(column, value):
@@ -33,7 +33,7 @@ def apply_filters_dynamic(query, filters, model):
 
         if len(aux) == 3:
             field, operator, value = aux
-            column = getattr(db_model, field)
+            column: Column = getattr(db_model, field)
 
             try:
                 value = convert_to_column_type(column, value)
