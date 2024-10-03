@@ -9,3 +9,4 @@ from app.routers.DefaultRouters.userProfileRouter import router as userProfileRo
 from app.routers.DefaultRouters.permissionsRouter import router as permissionsRouter
 from app.routers.DefaultRouters.tokenRouter import router as tokenRouter
 from app.routers.DefaultRouters.employeeRouter import router as employeeRouter
+from app.routers.DefaultRouters.inputOutputStockRouter import router as inputOutputStockRouter

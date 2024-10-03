@@ -7,7 +7,8 @@ class InputOutputStockBase(BaseModel):
     type: str
     qtd: float
     date: datetime.datetime
-    product_custom_entity_id: int
+    product_id: int
+    user_id: int
 
 
 class InputOutputStockCreate(InputOutputStockBase):

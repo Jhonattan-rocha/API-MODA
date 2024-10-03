@@ -6,6 +6,7 @@ from app.routers.DefaultRouters import personRouter
 from app.routers.DefaultRouters import companyRouter
 from app.routers.DefaultRouters import tokenRouter
 from app.routers.DefaultRouters import employeeRouter
+from app.routers.DefaultRouters import inputOutputStockRouter
 
 from app.routers.CustomRouters import dynamicEntityRouter
 from app.routers.CustomRouters import dynamicFieldRouter

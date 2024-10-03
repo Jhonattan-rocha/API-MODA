@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import database
 from app.routers import (categoryRouter)
 from app.routers.DefaultRouters import companyRouter, subCategoryRouter, productCategoryRouter, personRouter, \
-    productRouter, userRouter, userProfileRouter, permissionsRouter, tokenRouter, employeeRouter
+    productRouter, userRouter, userProfileRouter, permissionsRouter, tokenRouter, employeeRouter, inputOutputStockRouter
 from app.routers.CustomRouters import (dynamicFieldValueRouter, dynamicEntityRouter, dynamicFieldRouter,
                                        genericRouter)
 
@@ -29,6 +29,7 @@ async def lifespan_startup(app: FastAPI):
     app.include_router(permissionsRouter)
     app.include_router(employeeRouter)
     app.include_router(tokenRouter)
+    app.include_router(inputOutputStockRouter)
     generate_doc()
     async with database.engine.begin() as conn:
         await conn.run_sync(database.Base.metadata.create_all)
