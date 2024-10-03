@@ -14,8 +14,10 @@ async def create_people(person: personSchema.PersonBase, db: AsyncSession = Depe
 
 
 @router.get("/people", response_model=list[personSchema.Person])
-async def read_people(skip: int = 0, limit: int = 10, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
-    return await person_controller.get_people(skip=skip, limit=limit, db=db)
+async def read_people(filters: str = None, skip: int = 0, limit: int = 10,
+                     db: AsyncSession = Depends(database.get_db),
+                     validation: str = Depends(verify_token)):
+    return await person_controller.get_people(skip=skip, limit=limit, db=db, filters=filters, model="Person")
 
 
 @router.get("/people/{person_id}", response_model=personSchema.Person)

@@ -1,7 +1,9 @@
+from typing import List, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from app.models import Person
 from app.schemas import PersonBase, PersonCreate
+from app.utils import apply_filters_dynamic
 
 
 async def create_person(db: AsyncSession, person: PersonBase):
@@ -11,9 +13,18 @@ async def create_person(db: AsyncSession, person: PersonBase):
     await db.refresh(db_person)
     return db_person
 
+ 
+async def get_people(db: AsyncSession, skip: int = 0, limit: int = 10, filters: Optional[List[str]] = None,
+                     model: str = ""):
+    query = select(Person)
 
-async def get_people(db: AsyncSession, skip: int = 0, limit: int = 10):
-    result = await db.execute(select(Person).offset(skip).limit(limit))
+    if filters and model:
+        query = apply_filters_dynamic(query, filters, model)
+    result = await db.execute(
+        query
+        .offset(skip)
+        .limit(limit if limit > 0 else None)
+    )
     return result.scalars().all()
 
 
