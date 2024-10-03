@@ -1,7 +1,9 @@
+from typing import List, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from app.models import InputOutputStock
 from app.schemas import InputOutputStockBase, InputOutputStockCreate
+from app.utils import apply_filters_dynamic
 
 
 async def create_input_output_stock(db: AsyncSession, input_output_stock: InputOutputStockBase):
@@ -12,10 +14,16 @@ async def create_input_output_stock(db: AsyncSession, input_output_stock: InputO
     return db_input_output_stock
 
 
-async def get_input_output_stocks(db: AsyncSession, skip: int = 0, limit: int = 10):
+async def get_input_output_stocks(db: AsyncSession, skip: int = 0, limit: int = 10, filters: Optional[List[str]] = None,
+                                  model: str = ""):
+    query = select(InputOutputStock)
+
+    if filters and model:
+        query = apply_filters_dynamic(query, filters, model)
     result = await db.execute(
-        select(InputOutputStock)
-        .offset(skip).limit(limit)
+        query
+        .offset(skip)
+        .limit(limit if limit > 0 else None) 
     )
     return result.scalars().unique().all()
 

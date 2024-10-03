@@ -1040,6 +1040,15 @@
                 ],
                 "parameters": [
                     {
+                        "name": "filters",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "title": "Filters"
+                        }
+                    },
+                    {
                         "name": "skip",
                         "in": "query",
                         "required": false,

@@ -14,8 +14,10 @@ async def create_category(input_output_stock: inputOutputStockSchema.InputOutput
 
 
 @router.get("/input_output_stock/", response_model=list[inputOutputStockSchema.InputOutputStock])
-async def read_categories(skip: int = 0, limit: int = 10, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
-    return await input_output_stock_controller.get_input_output_stocks(skip=skip, limit=limit, db=db)
+async def read_categories(filters: str = None, skip: int = 0, limit: int = 10,
+                          db: AsyncSession = Depends(database.get_db),
+                          validation: str = Depends(verify_token)):
+    return await input_output_stock_controller.get_input_output_stocks(skip=skip, limit=limit, db=db, filters=filters, model="InputOutputStock")
 
 
 @router.get("/input_output_stock/{input_output_stock_id}", response_model=inputOutputStockSchema.InputOutputStock)
