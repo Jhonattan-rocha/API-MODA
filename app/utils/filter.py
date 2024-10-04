@@ -65,7 +65,6 @@ def apply_filters_dynamic(query, filters, model):
 
             if constraint == 'order_by':
                 query = query.order_by(column if column else None)
-
     if conditions:
         query = query.where(and_(*conditions))
 
