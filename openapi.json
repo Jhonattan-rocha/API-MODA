@@ -3539,7 +3539,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/InputOutputStockBase"
+                                    "$ref": "#/components/schemas/InputOutputStockCreate"
                                 }
                             }
                         }

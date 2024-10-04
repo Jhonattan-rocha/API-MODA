@@ -8,7 +8,7 @@ from app.schemas.DefaultSchemas import inputOutputStockSchema
 router = APIRouter(prefix="/crud")
 
 
-@router.post("/input_output_stock/", response_model=inputOutputStockSchema.InputOutputStockBase)
+@router.post("/input_output_stock/", response_model=inputOutputStockSchema.InputOutputStockCreate)
 async def create_category(input_output_stock: inputOutputStockSchema.InputOutputStockBase, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await input_output_stock_controller.create_input_output_stock(input_output_stock=input_output_stock, db=db)
 
