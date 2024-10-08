@@ -5,6 +5,7 @@ from app.schemas.CustomSchemas.dynamicFields import DynamicFields
 
 class DynamicEntityBase(BaseModel):
     entity_name: str
+    is_page: bool
 
 
 class DynamicEntityCreate(DynamicEntityBase):
