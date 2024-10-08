@@ -7,9 +7,10 @@ class DynamicFieldToEntityValue(Base):
     __tablename__ = 'dynamic_field_to_entity_value'
 
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
-    entity_id = Column(Integer, ForeignKey('dynamic_entities.id'), nullable=False)
+    entity_id = Column(Integer, ForeignKey('dynamic_entities.id', ondelete='CASCADE'), nullable=False)
     entity_id_instance = Column(String, nullable=False)
-    field_id = Column(Integer, ForeignKey('dynamic_fields.id'), nullable=False)
+    field_id = Column(Integer, ForeignKey('dynamic_fields.id', ondelete='CASCADE'), nullable=False)
     value = Column(String(255), nullable=True)
-
-    field = relationship("DynamicFields", foreign_keys="DynamicFieldToEntityValue.field_id")
+    
+    # Relacionamento reverso com DynamicFields
+    field = relationship("DynamicFields", back_populates="values")

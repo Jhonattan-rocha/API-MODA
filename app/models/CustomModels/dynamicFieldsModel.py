@@ -9,7 +9,13 @@ class DynamicFields(Base):
     id = Column(Integer, primary_key=True, autoincrement=True, index=True, unique=True)
     field_name = Column(String(255), index=True, nullable=False)
     type_value = Column(String(20), nullable=False)
-    entity_id = Column(Integer, ForeignKey('dynamic_entities.id'), nullable=False)
-
-    entity = relationship("DynamicEntity", back_populates="fields", foreign_keys="DynamicFields.entity_id")
- 
+    entity_id = Column(Integer, ForeignKey('dynamic_entities.id', ondelete='CASCADE'), nullable=False)
+    
+    entity = relationship("DynamicEntity", back_populates="fields")
+    
+    values = relationship(
+        "DynamicFieldToEntityValue",
+        back_populates="field",
+        cascade='all, delete-orphan',
+        passive_deletes=True
+    )
