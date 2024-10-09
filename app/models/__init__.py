@@ -9,6 +9,7 @@ from app.models.DefaultModels import User
 from app.models.DefaultModels import UserProfile
 from app.models.DefaultModels import Permissions
 from app.models.DefaultModels import InputOutputStock
+from app.models.DefaultModels import File
 
 from app.models.CustomModels import DynamicEntity
 from app.models.CustomModels import DynamicFields

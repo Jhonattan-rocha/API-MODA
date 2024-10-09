@@ -10,6 +10,7 @@ from app.schemas.DefaultSchemas import UserProfileCreate, UserProfile, UserProfi
 from app.schemas.DefaultSchemas import PermissionsCreate, Permissions, PermissionsBase
 from app.schemas.DefaultSchemas import InputOutputStockCreate, InputOutputStock, InputOutputStockBase
 from app.schemas.DefaultSchemas import Token
+from app.schemas.DefaultSchemas import FileBase, FileCreate, FileResponse
 
 from app.schemas.CustomSchemas import DynamicEntityCreate, DynamicEntity, DynamicEntityBase
 from app.schemas.CustomSchemas import DynamicFieldsCreate, DynamicFields, DynamicFieldsBase

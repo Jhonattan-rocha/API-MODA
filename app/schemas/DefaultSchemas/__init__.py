@@ -10,4 +10,5 @@ from app.schemas.DefaultSchemas.userProfileSchema import UserProfileCreate, User
 from app.schemas.DefaultSchemas.permissionsSchema import PermissionsCreate, Permissions, PermissionsBase
 from app.schemas.DefaultSchemas.inputOutputStockSchema import (InputOutputStockCreate, InputOutputStock,
                                                                InputOutputStockBase)
+from app.schemas.DefaultSchemas.fileSchema import FileBase, FileCreate, FileResponse
 from app.schemas.DefaultSchemas.tokenSchema import Token

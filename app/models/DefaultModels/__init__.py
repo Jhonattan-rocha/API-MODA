@@ -9,4 +9,4 @@ from app.models.DefaultModels.userModel import User
 from app.models.DefaultModels.userProfileModel import UserProfile
 from app.models.DefaultModels.permissionsModel import Permissions
 from app.models.DefaultModels.inputOutputStockModel import InputOutputStock
-
+from app.models.DefaultModels.fileModel import File

@@ -10,3 +10,4 @@ from app.routers.DefaultRouters.permissionsRouter import router as permissionsRo
 from app.routers.DefaultRouters.tokenRouter import router as tokenRouter
 from app.routers.DefaultRouters.employeeRouter import router as employeeRouter
 from app.routers.DefaultRouters.inputOutputStockRouter import router as inputOutputStockRouter
+from app.routers.DefaultRouters.fileRouter import router as fileRouter
