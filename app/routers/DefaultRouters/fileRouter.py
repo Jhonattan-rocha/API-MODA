@@ -1,3 +1,4 @@
+from typing import List, Optional
 from fastapi import APIRouter, Depends, File, UploadFile, HTTPException
 from fastapi.responses import FileResponse
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -48,8 +49,8 @@ async def download_file(file_id: int, db: AsyncSession = Depends(database.get_db
 
 
 @router.get("/files/", response_model=list[fileSchema.FileResponse])
-async def read_files(skip: int = 0, limit: int = 10, db: AsyncSession = Depends(database.get_db), validation: int = Depends(verify_token)):
-    files = await file_controller.get_files(db=db, skip=skip, limit=limit)
+async def read_files(skip: int = 0, limit: int = 10, db: AsyncSession = Depends(database.get_db), filters: Optional[List[str]] = None, validation: int = Depends(verify_token)):
+    files = await file_controller.get_files(db=db, skip=skip, limit=limit, filters=filters, model="File")
     return files
 
 @router.get("/files/{file_id}", response_model=fileSchema.FileResponse)
