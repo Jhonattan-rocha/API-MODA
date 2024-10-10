@@ -4594,6 +4594,10 @@
                     "file_path": {
                         "type": "string",
                         "title": "File Path"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
                     }
                 },
                 "type": "object",
@@ -4601,7 +4605,8 @@
                     "filename",
                     "originalname",
                     "content_type",
-                    "file_path"
+                    "file_path",
+                    "id"
                 ],
                 "title": "FileCreate"
             },

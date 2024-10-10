@@ -7,7 +7,7 @@ class FileBase(BaseModel):
     file_path: str
 
 class FileCreate(FileBase):
-    pass
+    id: int
 
 class FileResponse(FileBase):
     id: int

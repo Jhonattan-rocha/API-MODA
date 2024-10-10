@@ -5,6 +5,7 @@ from sqlalchemy.future import select
 from app.models import File
 from app.schemas import FileCreate, FileBase
 from app.utils import apply_filters_dynamic
+import os
 
 async def get_file(db: AsyncSession, file_id: int):
     result = await db.execute(
@@ -25,7 +26,7 @@ async def get_files(db: AsyncSession, skip: int = 0, limit: int = 10, filters: O
     )
     return result.scalars().unique().first()
 
-async def create_file(db: AsyncSession, file: FileCreate):
+async def create_file(db: AsyncSession, file: FileBase):
     db_file = File(**file.model_dump())
     db.add(db_file)
     await db.commit()
@@ -37,6 +38,9 @@ async def delete_file(db: AsyncSession, file_id: int):
     file = result.scalars().first()
     if file is None:
         return None
+    
+    if os.path.exists(file.file_path):
+        os.unlink(file.file_path)
     await db.delete(file)
     await db.commit()
     return file

@@ -31,7 +31,7 @@ async def create_file(
     # Criar um registro no banco de dados
     db_file = await file_controller.create_file(
         db=db,
-        file=fileSchema.FileCreate(
+        file=fileSchema.FileBase(
             filename=filename,
             originalname=file.filename,
             content_type=file.content_type,
