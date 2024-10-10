@@ -4277,6 +4277,10 @@
             },
             "DynamicEntity": {
                 "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
                     "entity_name": {
                         "type": "string",
                         "title": "Entity Name"
@@ -4284,10 +4288,6 @@
                     "is_page": {
                         "type": "boolean",
                         "title": "Is Page"
-                    },
-                    "id": {
-                        "type": "integer",
-                        "title": "Id"
                     },
                     "fields": {
                         "items": {
@@ -4308,13 +4308,16 @@
                 "required": [
                     "entity_name",
                     "is_page",
-                    "id",
                     "fields"
                 ],
                 "title": "DynamicEntity"
             },
             "DynamicEntityCreate": {
                 "properties": {
+                    "id": {
+                        "type": "string",
+                        "title": "Id"
+                    },
                     "entity_name": {
                         "type": "string",
                         "title": "Entity Name"
@@ -4334,7 +4337,7 @@
             "DynamicFieldToEntityValue": {
                 "properties": {
                     "entity_id": {
-                        "type": "integer",
+                        "type": "string",
                         "title": "Entity Id"
                     },
                     "entity_id_instance": {
@@ -4378,7 +4381,7 @@
             "DynamicFieldToEntityValueCreate": {
                 "properties": {
                     "entity_id": {
-                        "type": "integer",
+                        "type": "string",
                         "title": "Entity Id"
                     },
                     "entity_id_instance": {
@@ -4414,7 +4417,7 @@
                         "title": "Type Value"
                     },
                     "entity_id": {
-                        "type": "integer",
+                        "type": "string",
                         "title": "Entity Id"
                     },
                     "id": {
@@ -4442,7 +4445,7 @@
                         "title": "Type Value"
                     },
                     "entity_id": {
-                        "type": "integer",
+                        "type": "string",
                         "title": "Entity Id"
                     }
                 },

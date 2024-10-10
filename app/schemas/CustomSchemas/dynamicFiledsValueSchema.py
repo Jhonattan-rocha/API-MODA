@@ -3,7 +3,7 @@ from typing import List, Optional
 from app.schemas.CustomSchemas.dynamicFields import DynamicFields
 
 class DynamicFieldToEntityValueBase(BaseModel):
-    entity_id: int
+    entity_id: str
     entity_id_instance: str
     field_id: int
     value: str

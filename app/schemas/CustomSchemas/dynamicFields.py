@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class DynamicFieldsBase(BaseModel):
     field_name: str
     type_value: str
-    entity_id: int
+    entity_id: str
 
 
 class DynamicFieldsCreate(DynamicFieldsBase):

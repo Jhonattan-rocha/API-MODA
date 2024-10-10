@@ -29,7 +29,7 @@ async def get_dynamic_entities(db: AsyncSession, skip: int = 0, limit: int = 10,
     return result.scalars().unique().all()
 
 
-async def get_dynamic_entity(db: AsyncSession, dynamic_entity_id: int):
+async def get_dynamic_entity(db: AsyncSession, dynamic_entity_id: str):
     result = await db.execute(
         select(DynamicEntity)
         .options(joinedload(DynamicEntity.fields))
@@ -38,7 +38,7 @@ async def get_dynamic_entity(db: AsyncSession, dynamic_entity_id: int):
     return result.scalars().unique().first()
 
 
-async def update_dynamic_entity(db: AsyncSession, dynamic_entity_id: int, updated_dynamic_entity: DynamicEntityCreate):
+async def update_dynamic_entity(db: AsyncSession, dynamic_entity_id: str, updated_dynamic_entity: DynamicEntityCreate):
     result = await db.execute(select(DynamicEntity).where(DynamicEntity.id == dynamic_entity_id))
     dynamic_entity = result.scalars().first()
     if dynamic_entity is None:
@@ -52,7 +52,7 @@ async def update_dynamic_entity(db: AsyncSession, dynamic_entity_id: int, update
     return dynamic_entity
 
 
-async def delete_dynamic_entity(db: AsyncSession, dynamic_entity_id: int):
+async def delete_dynamic_entity(db: AsyncSession, dynamic_entity_id: str):
     result = await db.execute(select(DynamicEntity).where(DynamicEntity.id == dynamic_entity_id))
     dynamic_entity = result.scalars().first()
     if dynamic_entity is None:
