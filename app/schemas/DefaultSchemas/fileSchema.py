@@ -2,15 +2,15 @@ from pydantic import BaseModel
 
 class FileBase(BaseModel):
     filename: str
+    originalname: str
     content_type: str
-    description: str | None = None
+    file_path: str
 
 class FileCreate(FileBase):
     pass
 
 class FileResponse(FileBase):
     id: int
-    file_path: str
 
     class Config:
         from_attributes = True

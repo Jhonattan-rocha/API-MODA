@@ -6,6 +6,6 @@ class File(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     filename = Column(String, index=True)
+    originalname = Column(String, index=True)
     content_type = Column(String)
-    description = Column(Text, nullable=True)
     file_path = Column(String)

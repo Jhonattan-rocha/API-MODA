@@ -7,17 +7,23 @@ from app.database import database
 from app.controllers import verify_token
 from app.schemas.DefaultSchemas import fileSchema
 import shutil
+import time
 import os
 
 router = APIRouter(prefix="/crud")
 
 # Upload de Arquivos
-@router.post("/files/", response_model=fileSchema.FileResponse)
+@router.post("/files/", response_model=fileSchema.FileCreate)
 async def create_file(
-    file: UploadFile = File(...), description: str = "", db: AsyncSession = Depends(database.get_db), validation: int = Depends(verify_token)
-):
-    file_location = f"files/{file.filename}"  # Define o caminho para salvar o arquivo
+    file: UploadFile = File(...), db: AsyncSession = Depends(database.get_db), validation: int = Depends(verify_token)
+):  
+    name, ext = os.path.splitext(file.filename)
+    filename = str(time.time_ns()) + "_" + name + ext
+    file_location = f"./files/{filename}"  # Define o caminho para salvar o arquivo
 
+    if not os.path.exists("./files"):
+        os.mkdir("./files")
+        
     # Salvar arquivo no sistema de arquivos
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
@@ -26,11 +32,11 @@ async def create_file(
     db_file = await file_controller.create_file(
         db=db,
         file=fileSchema.FileCreate(
-            filename=file.filename,
+            filename=filename,
+            originalname=file.filename,
             content_type=file.content_type,
-            description=description,
+            file_path=os.path.abspath(file_location)
         ),
-        file_path=file_location,
     )
     return db_file
 

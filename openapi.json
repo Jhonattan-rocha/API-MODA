@@ -3768,18 +3768,6 @@
                         "OAuth2PasswordBearer": []
                     }
                 ],
-                "parameters": [
-                    {
-                        "name": "description",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "default": "",
-                            "title": "Description"
-                        }
-                    }
-                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -3796,7 +3784,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/FileResponse"
+                                    "$ref": "#/components/schemas/FileCreate"
                                 }
                             }
                         }
@@ -4589,30 +4577,19 @@
                 ],
                 "title": "EmployeesCreate"
             },
-            "FileResponse": {
+            "FileCreate": {
                 "properties": {
                     "filename": {
                         "type": "string",
                         "title": "Filename"
                     },
+                    "originalname": {
+                        "type": "string",
+                        "title": "Originalname"
+                    },
                     "content_type": {
                         "type": "string",
                         "title": "Content Type"
-                    },
-                    "description": {
-                        "anyOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ],
-                        "title": "Description"
-                    },
-                    "id": {
-                        "type": "integer",
-                        "title": "Id"
                     },
                     "file_path": {
                         "type": "string",
@@ -4622,9 +4599,42 @@
                 "type": "object",
                 "required": [
                     "filename",
+                    "originalname",
                     "content_type",
-                    "id",
                     "file_path"
+                ],
+                "title": "FileCreate"
+            },
+            "FileResponse": {
+                "properties": {
+                    "filename": {
+                        "type": "string",
+                        "title": "Filename"
+                    },
+                    "originalname": {
+                        "type": "string",
+                        "title": "Originalname"
+                    },
+                    "content_type": {
+                        "type": "string",
+                        "title": "Content Type"
+                    },
+                    "file_path": {
+                        "type": "string",
+                        "title": "File Path"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "filename",
+                    "originalname",
+                    "content_type",
+                    "file_path",
+                    "id"
                 ],
                 "title": "FileResponse"
             },
