@@ -10,8 +10,8 @@ from sqlalchemy.orm.collections import InstrumentedList
 
 class GenericController:
     def __init__(self, model: str):
-        self.model = models_mapping[model]
-        self.fields = models_fields_mapping[model]
+        self.model = models_mapping[model] if model in models_mapping.keys() else models_mapping["*"]
+        self.fields = models_fields_mapping[model] if model in models_fields_mapping.keys() else models_fields_mapping["*"]
 
     async def create(self, db: AsyncSession, obj_in: GenericCreate):
         db_obj = self.model(**obj_in.values)

@@ -11,8 +11,7 @@ router = APIRouter(prefix="/crud")
 @router.post("/generic", response_model=genericSchema.GenericCreate)
 async def generic_create(generic: genericSchema.GenericCreate,
                          db: AsyncSession = Depends(database.get_db), model: str = "", validation: str = Depends(verify_token)):
-    if model not in models_mapping.keys():
-        raise HTTPException(status_code=400, detail="Invalid model name provided")
+
 
     generic_controller = GenericController(model=model)
     result = await generic_controller.create(obj_in=generic, db=db)
@@ -28,8 +27,7 @@ async def generic_create(generic: genericSchema.GenericCreate,
 @router.get("/generic", response_model=list[genericSchema.GenericCreate])
 async def generic_reads(skip: int = 0, limit: int = 10, model: str = "",
                         db: AsyncSession = Depends(database.get_db), filters: str = None, validation: str = Depends(verify_token)):
-    if model not in models_mapping.keys():
-        raise HTTPException(status_code=400, detail="Invalid model name provided")
+
 
     generic_controller = GenericController(model=model)
     result = await generic_controller.catch(skip=skip, limit=limit, db=db, model=model, filters=filters)
@@ -43,8 +41,7 @@ async def generic_reads(skip: int = 0, limit: int = 10, model: str = "",
 @router.get("/generic/{generic_id}",
             response_model=genericSchema.GenericCreate)
 async def generic_read(generic_id: int, model: str = "", db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
-    if model not in models_mapping.keys():
-        raise HTTPException(status_code=400, detail="Invalid model name provided")
+
 
     generic_controller = GenericController(model=model)
     result = await generic_controller.get(id=generic_id, db=db)
@@ -61,8 +58,7 @@ async def generic_update(generic_id: int,
                          model: str,
                          updated_generic: genericSchema.GenericCreate,
                          db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
-    if model not in models_mapping.keys():
-        raise HTTPException(status_code=400, detail="Invalid model name provided")
+
 
     generic_controller = GenericController(model=model)
     db_obj = await generic_controller.get(id=generic_id, db=db)
@@ -73,8 +69,7 @@ async def generic_update(generic_id: int,
 
 @router.delete("/generic/{generic_id}", response_model=genericSchema.GenericCreate)
 async def generic_delete(generic_id: int, model: str, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
-    if model not in models_mapping.keys():
-        raise HTTPException(status_code=400, detail="Invalid model name provided")
+
 
     generic_controller = GenericController(model=model)
     result = await generic_controller.delete(id=generic_id, db=db)

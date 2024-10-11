@@ -26,7 +26,7 @@ def convert_to_column_type(column, value):
 
 def apply_filters_dynamic(query, filters, model):
     conditions = []
-    db_model = models_mapping[model]
+    db_model = models_mapping[model] if model in models_mapping.keys() else models_mapping["*"]
     filters = filters.split("$")
     for filter_string in filters:
         aux = filter_string.split("+")

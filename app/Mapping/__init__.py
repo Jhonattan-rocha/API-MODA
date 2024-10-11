@@ -19,7 +19,8 @@ models_mapping: dict[str, Base] = {
     "DynamicEntity": DynamicEntity,
     "DynamicFields": DynamicFields,
     "DynamicFieldToEntityValue": DynamicFieldToEntityValue,
-    "File": File
+    "File": File,
+    "*": DynamicFieldToEntityValue
 }
 
 models_fields_mapping: dict[str, tuple] = {
@@ -32,5 +33,6 @@ models_fields_mapping: dict[str, tuple] = {
     "Company": ("name", "social_reason", "cnpj", "tel", "email", "address"),
     "Employees": ("id_emp", "name", "cpf", "tel", "email", "address"),
     "Product": ("name", "description", "price"),
-    "Person": ("name", "cpf", "tel", "email", "address")
+    "Person": ("name", "cpf", "tel", "email", "address"),
+    "*": ("entity_id", "entity_id_instance", "field_id", "value")
 }
