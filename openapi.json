@@ -4424,6 +4424,10 @@
                         "type": "string",
                         "title": "Entity Rel"
                     },
+                    "field_entity_rel": {
+                        "type": "string",
+                        "title": "Field Entity Rel"
+                    },
                     "id": {
                         "type": "integer",
                         "title": "Id"
@@ -4435,6 +4439,7 @@
                     "type_value",
                     "entity_id",
                     "entity_rel",
+                    "field_entity_rel",
                     "id"
                 ],
                 "title": "DynamicFields"
@@ -4456,6 +4461,10 @@
                     "entity_rel": {
                         "type": "string",
                         "title": "Entity Rel"
+                    },
+                    "field_entity_rel": {
+                        "type": "string",
+                        "title": "Field Entity Rel"
                     }
                 },
                 "type": "object",
@@ -4463,7 +4472,8 @@
                     "field_name",
                     "type_value",
                     "entity_id",
-                    "entity_rel"
+                    "entity_rel",
+                    "field_entity_rel"
                 ],
                 "title": "DynamicFieldsCreate"
             },
@@ -4939,10 +4949,6 @@
                         "type": "string",
                         "title": "Email"
                     },
-                    "address": {
-                        "type": "string",
-                        "title": "Address"
-                    },
                     "id": {
                         "type": "integer",
                         "title": "Id"
@@ -4954,7 +4960,6 @@
                     "cpf",
                     "tel",
                     "email",
-                    "address",
                     "id"
                 ],
                 "title": "Person"
@@ -4976,10 +4981,6 @@
                     "email": {
                         "type": "string",
                         "title": "Email"
-                    },
-                    "address": {
-                        "type": "string",
-                        "title": "Address"
                     }
                 },
                 "type": "object",
@@ -4987,8 +4988,7 @@
                     "name",
                     "cpf",
                     "tel",
-                    "email",
-                    "address"
+                    "email"
                 ],
                 "title": "PersonBase"
             },
@@ -5010,10 +5010,6 @@
                         "type": "string",
                         "title": "Email"
                     },
-                    "address": {
-                        "type": "string",
-                        "title": "Address"
-                    },
                     "id": {
                         "type": "integer",
                         "title": "Id"
@@ -5025,7 +5021,6 @@
                     "cpf",
                     "tel",
                     "email",
-                    "address",
                     "id"
                 ],
                 "title": "PersonCreate"

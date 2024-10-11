@@ -8,7 +8,6 @@ class PersonBase(BaseModel):
     cpf: str
     tel: str
     email: str
-    address: str
 
     @field_validator('cpf')
     def cpf_cnpj_check(cls, v):

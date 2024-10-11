@@ -6,6 +6,7 @@ class DynamicFieldsBase(BaseModel):
     type_value: str
     entity_id: str
     entity_rel: str
+    field_entity_rel: str
 
 
 class DynamicFieldsCreate(DynamicFieldsBase):

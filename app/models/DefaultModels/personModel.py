@@ -11,4 +11,3 @@ class Person(Base):
     cpf = Column(String(20), index=True)
     tel = Column(String(20))
     email = Column(String(100), unique=True, index=True)
-    address = Column(String(200))
