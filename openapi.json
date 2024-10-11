@@ -4420,6 +4420,10 @@
                         "type": "string",
                         "title": "Entity Id"
                     },
+                    "entity_rel": {
+                        "type": "string",
+                        "title": "Entity Rel"
+                    },
                     "id": {
                         "type": "integer",
                         "title": "Id"
@@ -4430,6 +4434,7 @@
                     "field_name",
                     "type_value",
                     "entity_id",
+                    "entity_rel",
                     "id"
                 ],
                 "title": "DynamicFields"
@@ -4447,13 +4452,18 @@
                     "entity_id": {
                         "type": "string",
                         "title": "Entity Id"
+                    },
+                    "entity_rel": {
+                        "type": "string",
+                        "title": "Entity Rel"
                     }
                 },
                 "type": "object",
                 "required": [
                     "field_name",
                     "type_value",
-                    "entity_id"
+                    "entity_id",
+                    "entity_rel"
                 ],
                 "title": "DynamicFieldsCreate"
             },

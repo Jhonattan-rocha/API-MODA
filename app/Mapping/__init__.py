@@ -24,5 +24,13 @@ models_mapping: dict[str, Base] = {
 
 models_fields_mapping: dict[str, tuple] = {
     "CustomEntityToEntity": ("entity_id_1", "entity_id_2"),
-    "ProductCategory": ("id_prod", "id_cat")
+    "ProductCategory": ("id_prod", "id_cat"),
+    "User": ("name", "email", "lang", "profile_id"),
+    "UserProfile": ("name",),
+    "SubCategory": ("name", "id_cat"),
+    "InputOutputStock": ("type", "qtd", "date", "product_id", "user_id"),
+    "Company": ("name", "social_reason", "cnpj", "tel", "email", "address"),
+    "Employees": ("id_emp", "name", "cpf", "tel", "email", "address"),
+    "Product": ("name", "description", "price"),
+    "Person": ("name", "cpf", "tel", "email", "address")
 }
