@@ -1602,7 +1602,7 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
+                            "type": "string",
                             "title": "Dynamic Entity Id"
                         }
                     }
@@ -1644,7 +1644,7 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
+                            "type": "string",
                             "title": "Dynamic Entity Id"
                         }
                     }
@@ -1696,7 +1696,7 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer",
+                            "type": "string",
                             "title": "Dynamic Entity Id"
                         }
                     }
