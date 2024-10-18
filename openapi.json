@@ -4285,10 +4285,6 @@
                         "type": "string",
                         "title": "Entity Name"
                     },
-                    "is_page": {
-                        "type": "boolean",
-                        "title": "Is Page"
-                    },
                     "fields": {
                         "items": {
                             "anyOf": [
@@ -4307,7 +4303,6 @@
                 "type": "object",
                 "required": [
                     "entity_name",
-                    "is_page",
                     "fields"
                 ],
                 "title": "DynamicEntity"
@@ -4321,16 +4316,11 @@
                     "entity_name": {
                         "type": "string",
                         "title": "Entity Name"
-                    },
-                    "is_page": {
-                        "type": "boolean",
-                        "title": "Is Page"
                     }
                 },
                 "type": "object",
                 "required": [
-                    "entity_name",
-                    "is_page"
+                    "entity_name"
                 ],
                 "title": "DynamicEntityCreate"
             },

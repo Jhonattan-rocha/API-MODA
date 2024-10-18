@@ -2,14 +2,11 @@ from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database import Base
 
-
-# Classe principal de entidades dinâmicas
 class DynamicEntity(Base):
     __tablename__ = 'dynamic_entities'
 
     id = Column(String, primary_key=True, index=True)
     entity_name = Column(String(255), index=True, unique=True, nullable=False)
-    is_page = Column(Boolean, default=False, nullable=False)
     
     fields = relationship(
         "DynamicFields", 

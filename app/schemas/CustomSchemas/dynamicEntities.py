@@ -9,7 +9,6 @@ def get_uuid():
 class DynamicEntityBase(BaseModel):
     id: str = Field(default_factory=get_uuid)
     entity_name: str
-    is_page: bool
 
 
 class DynamicEntityCreate(DynamicEntityBase):
