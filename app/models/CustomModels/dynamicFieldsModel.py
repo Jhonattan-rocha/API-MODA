@@ -11,7 +11,7 @@ class DynamicFields(Base):
     type_value = Column(String(20), nullable=False)
     entity_rel = Column(String, nullable=True, default="")
     field_entity_rel = Column(String, nullable=True, default="")
-    rules = Column(String, nullable=True, default="")
+    rules = Column(String(255), nullable=True, default="")
     entity_id = Column(String, ForeignKey('dynamic_entities.id', ondelete='CASCADE'), nullable=False)
     
     entity = relationship("DynamicEntity", back_populates="fields")
