@@ -1,7 +1,7 @@
 from app.Mapping import models_mapping
 from sqlalchemy.types import Integer, String, Float, Boolean, Date, DateTime
 from sqlalchemy import and_, func, Column
-
+from datetime import datetime, timedelta
 
 def convert_to_column_type(column, value):
     column_type = column.type
@@ -14,7 +14,6 @@ def convert_to_column_type(column, value):
         elif isinstance(column_type, Boolean):
             return value.lower() in ['true', '1', 'yes']
         elif isinstance(column_type, Date) or isinstance(column_type, DateTime):
-            from datetime import datetime
             return datetime.fromisoformat(value)
         elif isinstance(column_type, String):
             return str(value)
@@ -64,11 +63,32 @@ def apply_filters_dynamic(query, filters, model):
                     conditions.append(func.lower(column).like(f"{aux[0]}%{aux[1]}".lower()))
             elif operator == "in":
                 conditions.append(column.in_([convert_to_column_type(column, val) for val in str(value).split(',')]))
+            elif operator == "between":
+                min_val, max_val = map(lambda x: convert_to_column_type(column, x), value.split(","))
+                conditions.append(column.between(min_val, max_val))
+            if operator == "week_eq":
+                week_number, year = map(int, value.split(","))
+                conditions.append(func.week(column) == week_number)
+                conditions.append(func.year(column) == year)
+            elif operator == "avg_gt":
+                conditions.append(func.avg(column) > value)
+            elif operator == "sum_eq":
+                conditions.append(func.sum(column) == value)
+            elif operator == "count_lt":
+                conditions.append(func.count(column) < value)
+                
         if len(aux) == 2:
             constraint, column = aux
 
             if constraint == 'order_by':
                 query = query.order_by(column if column else None)
+            elif constraint == "last_days":
+                days_ago = datetime.now() - timedelta(days=int(value))
+                conditions.append(column >= days_ago)
+            elif constraint == "next_days":
+                days_ahead = datetime.now() + timedelta(days=int(value))
+                conditions.append(column <= days_ahead)
+                
     if conditions:
         query = query.where(and_(*conditions))
 
