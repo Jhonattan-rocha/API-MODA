@@ -1,10 +1,11 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional
 from app.schemas.CustomSchemas.dynamicFields import DynamicFields
-import uuid
+import uuid, re
 
 def get_uuid():
-    return str(uuid.uuid4())
+    regex = re.compile(r"\D")
+    return regex.sub("", str(uuid.uuid4()))
 
 class DynamicEntityBase(BaseModel):
     id: str = Field(default_factory=get_uuid)
