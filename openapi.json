@@ -4423,6 +4423,21 @@
                         "title": "Rules",
                         "default": ""
                     },
+                    "required": {
+                        "type": "boolean",
+                        "title": "Required",
+                        "default": false
+                    },
+                    "readOnly": {
+                        "type": "boolean",
+                        "title": "Readonly",
+                        "default": false
+                    },
+                    "disabled": {
+                        "type": "boolean",
+                        "title": "Disabled",
+                        "default": false
+                    },
                     "id": {
                         "type": "integer",
                         "title": "Id"
@@ -4465,6 +4480,21 @@
                         "type": "string",
                         "title": "Rules",
                         "default": ""
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "title": "Required",
+                        "default": false
+                    },
+                    "readOnly": {
+                        "type": "boolean",
+                        "title": "Readonly",
+                        "default": false
+                    },
+                    "disabled": {
+                        "type": "boolean",
+                        "title": "Disabled",
+                        "default": false
                     }
                 },
                 "type": "object",

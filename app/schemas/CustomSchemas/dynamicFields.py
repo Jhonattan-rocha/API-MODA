@@ -8,6 +8,9 @@ class DynamicFieldsBase(BaseModel):
     entity_rel: str
     field_entity_rel: str
     rules: str = ""
+    required: bool = False
+    readOnly: bool = False
+    disabled: bool = False
 
 
 class DynamicFieldsCreate(DynamicFieldsBase):
