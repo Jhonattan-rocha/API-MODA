@@ -9,7 +9,8 @@ from app.routers.DefaultRouters import companyRouter, subCategoryRouter, product
     productRouter, userRouter, userProfileRouter, permissionsRouter, tokenRouter, employeeRouter, inputOutputStockRouter, fileRouter
 from app.routers.CustomRouters import (dynamicFieldValueRouter, dynamicEntityRouter, dynamicFieldRouter,
                                        genericRouter)
-
+import logging
+from uvicorn.config import LOGGING_CONFIG
 
 # Cria as tabelas no banco de dados
 @asynccontextmanager
@@ -75,8 +76,28 @@ app.add_middleware(
     allow_headers=["*"],  # Permite todos os cabeçalhos
 )
 
+# Configuração do formato do log
+LOGGING_CONFIG["formatters"]["access"] = {
+    "()": "uvicorn.logging.AccessFormatter",
+    "fmt": "%(asctime)s - %(levelname)s - %(client_addr)s - %(request_line)s - %(status_code)s",
+}
+
+# Configuração do handler para salvar os logs em arquivo
+LOGGING_CONFIG["handlers"]["file"] = {
+    "class": "logging.FileHandler",
+    "filename": "access.log",  # Nome do arquivo de log
+    "formatter": "access",
+}
+
+# Adiciona o novo handler no logger de acesso
+LOGGING_CONFIG["loggers"]["uvicorn.access"] = {
+    "level": "INFO",
+    "handlers": ["file"],  # Define que o log de acesso será salvo no arquivo
+    "propagate": False,
+}
+
 if __name__ == "__main__":
     import uvicorn
     import sys
 
-    uvicorn.run("main:app", host=sys.argv[1], port=8081, reload=True)
+    uvicorn.run("main:app", host=sys.argv[1], port=8081, reload=True, log_config=LOGGING_CONFIG, proxy_headers=True)
