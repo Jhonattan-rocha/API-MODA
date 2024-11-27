@@ -9,4 +9,4 @@ class Category(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, index=True)
 #    categories_products = relationship("ProductCategory", back_populates="category", foreign_keys="ProductCategory.id_cat")
-    subcategories = relationship("SubCategory", back_populates="category", lazy='joined')
+    subcategories = relationship("SubCategory", back_populates="category", cascade='all, delete-orphan', lazy='joined')

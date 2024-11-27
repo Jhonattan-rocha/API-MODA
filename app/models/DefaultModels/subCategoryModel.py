@@ -8,6 +8,6 @@ class SubCategory(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, index=True)
-    id_cat = Column(Integer, ForeignKey('categories.id'), nullable=True)
+    id_cat = Column(Integer, ForeignKey('categories.id', ondelete='CASCADE'), nullable=True)
 
     category = relationship("Category", back_populates="subcategories", foreign_keys="SubCategory.id_cat", lazy='joined')
