@@ -3476,19 +3476,30 @@
                 }
             }
         },
-        "/crud/token": {
+        "/crud/token/{public_key}": {
             "post": {
                 "summary": "Login",
-                "operationId": "login_crud_token_post",
+                "operationId": "login_crud_token__public_key__post",
+                "parameters": [
+                    {
+                        "name": "public_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Public Key"
+                        }
+                    }
+                ],
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/Body_login_crud_token_post"
+                                "$ref": "#/components/schemas/Body_login_crud_token__public_key__post"
                             }
                         }
-                    },
-                    "required": true
+                    }
                 },
                 "responses": {
                     "200": {
@@ -4015,7 +4026,7 @@
                 ],
                 "title": "Body_create_file_crud_files__post"
             },
-            "Body_login_crud_token_post": {
+            "Body_login_crud_token__public_key__post": {
                 "properties": {
                     "grant_type": {
                         "anyOf": [
@@ -4070,7 +4081,7 @@
                     "username",
                     "password"
                 ],
-                "title": "Body_login_crud_token_post"
+                "title": "Body_login_crud_token__public_key__post"
             },
             "Category": {
                 "properties": {
@@ -5297,13 +5308,23 @@
                     "user": {
                         "type": "object",
                         "title": "User"
+                    },
+                    "crypt_token": {
+                        "type": "string",
+                        "title": "Crypt Token"
+                    },
+                    "iv": {
+                        "type": "string",
+                        "title": "Iv"
                     }
                 },
                 "type": "object",
                 "required": [
                     "access_token",
                     "token_type",
-                    "user"
+                    "user",
+                    "crypt_token",
+                    "iv"
                 ],
                 "title": "Token"
             },
