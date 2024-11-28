@@ -9,12 +9,22 @@ from app.routers.DefaultRouters import companyRouter, subCategoryRouter, product
     productRouter, userRouter, userProfileRouter, permissionsRouter, tokenRouter, employeeRouter, inputOutputStockRouter, fileRouter
 from app.routers.CustomRouters import (dynamicFieldValueRouter, dynamicEntityRouter, dynamicFieldRouter,
                                        genericRouter)
-import logging
+import os
 from uvicorn.config import LOGGING_CONFIG
+import globals
+
+# Função para gerar uma chave AES e IV
+def generate_aes_key_and_iv():
+    aes_key = os.urandom(32)  # Chave AES de 256 bits
+    iv = os.urandom(12)  # IV de 96 bits para AES-GCM
+    return aes_key, iv
 
 # Cria as tabelas no banco de dados
 @asynccontextmanager
 async def lifespan_startup(app: FastAPI):
+    aes_key, iv = generate_aes_key_and_iv()
+    globals.aes_key = aes_key
+    globals.iv = iv
     app.include_router(categoryRouter)
     app.include_router(productRouter)
     app.include_router(productCategoryRouter)

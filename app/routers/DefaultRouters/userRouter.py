@@ -1,5 +1,3 @@
-from typing import Optional, List
-
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.controllers.DefaultControllers import userController as user_controller

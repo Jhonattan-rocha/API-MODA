@@ -14,18 +14,10 @@ from sqlalchemy.orm import joinedload
 import hashlib
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import serialization, hashes 
-import os
+import globals
 import base64
 
 router = APIRouter(prefix="/crud")
-
-
-# Função para gerar uma chave AES e IV
-def generate_aes_key_and_iv():
-    aes_key = os.urandom(32)  # Chave AES de 256 bits
-    iv = os.urandom(12)  # IV de 96 bits para AES-GCM
-    return aes_key, iv
-
 
 # Função para criptografar a chave AES com a chave pública RSA
 def encrypt_with_public_key(public_key_pem: str, aes_key: bytes) -> bytes:
@@ -69,8 +61,9 @@ async def login(
                 headers={"WWW-Authenticate": "Bearer"},
             )
 
-        # Gerar chave AES e IV
-        aes_key, iv = generate_aes_key_and_iv()
+        # Gerar chave AES e IV <----
+        aes_key = globals.aes_key
+        iv = globals.iv
 
         if not public_key:
             raise HTTPException(
