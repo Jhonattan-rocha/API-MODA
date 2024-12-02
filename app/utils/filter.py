@@ -2,6 +2,7 @@ from app.Mapping import models_mapping
 from sqlalchemy.types import Integer, String, Float, Boolean, Date, DateTime
 from sqlalchemy import and_, func, Column
 from datetime import datetime, timedelta
+from sqlalchemy.orm import aliased
 
 def convert_to_column_type(column, value):
     column_type = column.type
@@ -27,6 +28,8 @@ def apply_filters_dynamic(query, filters, model):
     conditions = []
     db_model = models_mapping[model] if model in models_mapping.keys() else models_mapping["*"]
     filters = filters.split("$")
+    joined_models = {}
+
     for filter_string in filters:
         aux = filter_string.split("+")
 
@@ -34,20 +37,23 @@ def apply_filters_dynamic(query, filters, model):
             field, operator, value = aux
             column: Column = getattr(db_model, field)
 
-            if "." in field:  # Verifica se é um campo relacionado
+            # Verifica se é um campo relacionado
+            if "." in field:
                 relation_name, related_field = field.split(".")
-                related_model = models_mapping.get(relation_name)
                 
+                # Recupera o modelo relacionado
+                related_model = getattr(db_model, relation_name, None)
                 if not related_model:
                     continue  # Ignorar se a relação não existe
                 
-                related_column = getattr(related_model, related_field, None)
-                if not related_column:
-                    continue  # Ignorar se o campo não existe
+                if relation_name not in joined_models:
+                    alias = aliased(models_mapping[relation_name])
+                    query = query.join(alias, getattr(db_model, relation_name))
+                    joined_models[relation_name] = alias
                 
-                # Adiciona a relação à query
-                query = query.join(related_model)
-                column = related_column
+                column = getattr(joined_models[relation_name], related_field, None)
+                if not column:
+                    continue  # Ignorar se o campo relacionado não existe
             else:
                 column = getattr(db_model, field, None)
                 if not column:

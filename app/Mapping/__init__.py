@@ -1,9 +1,9 @@
 from app.models.CustomModels import (CustomEntityToEntity, DynamicEntity, DynamicFields, DynamicFieldToEntityValue)
 from app.models.DefaultModels import (User, UserProfile, Permissions, SubCategory, InputOutputStock, Company, Category,
                                       Employees, Product, Person, ProductCategory, File)
-from app.database import Base
+from typing import Any
 
-models_mapping: dict[str, Base] = {
+models_mapping: dict[str, Any] = {
     "User": User,
     "UserProfile": UserProfile,
     "Permissions": Permissions,
