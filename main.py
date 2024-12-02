@@ -1,17 +1,18 @@
 import json
 from contextlib import asynccontextmanager
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import database
+from app.middleware.securityHeaders import SecurityHeadersMiddleware
 from app.routers import (categoryRouter)
 from app.routers.DefaultRouters import companyRouter, subCategoryRouter, productCategoryRouter, personRouter, \
     productRouter, userRouter, userProfileRouter, permissionsRouter, tokenRouter, employeeRouter, inputOutputStockRouter, fileRouter
 from app.routers.CustomRouters import (dynamicFieldValueRouter, dynamicEntityRouter, dynamicFieldRouter,
                                        genericRouter)
-import os
+import os, logging
 from uvicorn.config import LOGGING_CONFIG
 import globals
+
 
 # Função para gerar uma chave AES e IV
 def generate_aes_key_and_iv():
@@ -85,6 +86,7 @@ app.add_middleware(
     allow_methods=["*"],  # Permite todos os métodos (GET, POST, etc.)
     allow_headers=["*"],  # Permite todos os cabeçalhos
 )
+app.add_middleware(SecurityHeadersMiddleware)
 
 # Configuração do formato do log
 LOGGING_CONFIG["formatters"]["access"] = {

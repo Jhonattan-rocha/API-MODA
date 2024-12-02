@@ -34,6 +34,25 @@ def apply_filters_dynamic(query, filters, model):
             field, operator, value = aux
             column: Column = getattr(db_model, field)
 
+            if "." in field:  # Verifica se é um campo relacionado
+                relation_name, related_field = field.split(".")
+                related_model = models_mapping.get(relation_name)
+                
+                if not related_model:
+                    continue  # Ignorar se a relação não existe
+                
+                related_column = getattr(related_model, related_field, None)
+                if not related_column:
+                    continue  # Ignorar se o campo não existe
+                
+                # Adiciona a relação à query
+                query = query.join(related_model)
+                column = related_column
+            else:
+                column = getattr(db_model, field, None)
+                if not column:
+                    continue  # Ignorar se o campo não existe
+            
             try:
                 value = convert_to_column_type(column, value)
             except ValueError as e:

@@ -103,6 +103,7 @@ async def login(
             "crypt_token": encrypted_aes_key_base64,  # Chave AES criptografada
             "iv": iv_base64  # IV para criptografia AES
         }
+        print(aux, aes_key, iv)
         return aux
 
     raise HTTPException(
