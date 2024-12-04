@@ -2011,8 +2011,8 @@
                 }
             },
             "get": {
-                "summary": "Read Dynamic Fields",
-                "operationId": "read_dynamic_fields_crud_dynamic_fields_values_get",
+                "summary": "Read Dynamic Field Values",
+                "operationId": "read_dynamic_field_values_crud_dynamic_fields_values_get",
                 "security": [
                     {
                         "OAuth2PasswordBearer": []
@@ -2059,7 +2059,7 @@
                                     "items": {
                                         "$ref": "#/components/schemas/DynamicFieldToEntityValue"
                                     },
-                                    "title": "Response Read Dynamic Fields Crud Dynamic Fields Values Get"
+                                    "title": "Response Read Dynamic Field Values Crud Dynamic Fields Values Get"
                                 }
                             }
                         }
@@ -2079,8 +2079,8 @@
         },
         "/crud/dynamic_fields_values/{dynamic_field_value_id}": {
             "get": {
-                "summary": "Read Dynamic Field",
-                "operationId": "read_dynamic_field_crud_dynamic_fields_values__dynamic_field_value_id__get",
+                "summary": "Read Dynamic Field Value",
+                "operationId": "read_dynamic_field_value_crud_dynamic_fields_values__dynamic_field_value_id__get",
                 "security": [
                     {
                         "OAuth2PasswordBearer": []
@@ -2121,8 +2121,8 @@
                 }
             },
             "put": {
-                "summary": "Update Dynamic Field",
-                "operationId": "update_dynamic_field_crud_dynamic_fields_values__dynamic_field_value_id__put",
+                "summary": "Update Dynamic Field Value",
+                "operationId": "update_dynamic_field_value_crud_dynamic_fields_values__dynamic_field_value_id__put",
                 "security": [
                     {
                         "OAuth2PasswordBearer": []

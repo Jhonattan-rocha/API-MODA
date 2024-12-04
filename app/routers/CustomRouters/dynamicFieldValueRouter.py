@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.controllers.CustomControllers import dynamicFieldValueController as dynamic_fields_values_controller
 from app.database import database
@@ -16,22 +16,28 @@ async def create_dynamic_field_value(dynamic_field_value: dynamicFiledsValueSche
 
 
 @router.get("/dynamic_fields_values", response_model=list[dynamicFiledsValueSchema.DynamicFieldToEntityValue])
-async def read_dynamic_fields(filters: str = None, skip: int = 0, limit: int = 10,
+async def read_dynamic_field_values(filters: str = None, skip: int = 0, limit: int = 10,
                                 db: AsyncSession = Depends(database.get_db),
                                 validation: str = Depends(verify_token)):
-    return await dynamic_fields_values_controller.get_dynamic_fields_values(skip=skip, limit=limit, db=db, filters=filters, model="DynamicFieldToEntityValue")
-
+    try:
+        return await dynamic_fields_values_controller.get_dynamic_fields_values(skip=skip, limit=limit, db=db, filters=filters, model="DynamicFieldToEntityValue")
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Invalid filter: {e}",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
 
 @router.get("/dynamic_fields_values/{dynamic_field_value_id}",
             response_model=dynamicFiledsValueSchema.DynamicFieldToEntityValue)
-async def read_dynamic_field(dynamic_field_value_id: int, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
+async def read_dynamic_field_value(dynamic_field_value_id: int, db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await dynamic_fields_values_controller.get_dynamic_field_value(dynamic_field_value_id=dynamic_field_value_id,
                                                                           db=db)
 
 
 @router.put("/dynamic_fields_values/{dynamic_field_value_id}",
             response_model=dynamicFiledsValueSchema.DynamicFieldToEntityValueCreate)
-async def update_dynamic_field(dynamic_field_value_id: int,
+async def update_dynamic_field_value(dynamic_field_value_id: int,
                                updated_dynamic_field_value: dynamicFiledsValueSchema.DynamicFieldToEntityValueCreate,
                                db: AsyncSession = Depends(database.get_db), validation: str = Depends(verify_token)):
     return await dynamic_fields_values_controller.update_dynamic_field_value(

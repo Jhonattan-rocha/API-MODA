@@ -91,7 +91,7 @@ def apply_filters_dynamic(query, filters, model):
             elif operator == "between":
                 min_val, max_val = map(lambda x: convert_to_column_type(column, x), value.split(","))
                 conditions.append(column.between(min_val, max_val))
-            if operator == "week_eq":
+            elif operator == "week_eq":
                 week_number, year = map(int, value.split(","))
                 conditions.append(func.week(column) == week_number)
                 conditions.append(func.year(column) == year)
