@@ -4008,6 +4008,154 @@
                     }
                 }
             }
+        },
+        "/crud/log/": {
+            "post": {
+                "summary": "Create Log",
+                "operationId": "create_log_crud_log__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoggerBase"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoggerCreate"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/crud/logs/": {
+            "get": {
+                "summary": "Read Logs",
+                "operationId": "read_logs_crud_logs__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "filters",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "title": "Filters"
+                        }
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 0,
+                            "title": "Skip"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 10,
+                            "title": "Limit"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Logger"
+                                    },
+                                    "title": "Response Read Logs Crud Logs  Get"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/crud/log/{log_id}": {
+            "delete": {
+                "summary": "Delete Log",
+                "operationId": "delete_log_crud_log__log_id__delete",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "log_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Log Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -4847,6 +4995,96 @@
                     "id"
                 ],
                 "title": "InputOutputStockCreate"
+            },
+            "Logger": {
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "title": "User Id"
+                    },
+                    "entity": {
+                        "type": "string",
+                        "title": "Entity"
+                    },
+                    "data": {
+                        "type": "string",
+                        "title": "Data",
+                        "default": "2024-12-05T10:07:30.653618"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "user": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_id",
+                    "entity",
+                    "id",
+                    "user"
+                ],
+                "title": "Logger"
+            },
+            "LoggerBase": {
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "title": "User Id"
+                    },
+                    "entity": {
+                        "type": "string",
+                        "title": "Entity"
+                    },
+                    "data": {
+                        "type": "string",
+                        "title": "Data",
+                        "default": "2024-12-05T10:07:30.653618"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_id",
+                    "entity"
+                ],
+                "title": "LoggerBase"
+            },
+            "LoggerCreate": {
+                "properties": {
+                    "user_id": {
+                        "type": "string",
+                        "title": "User Id"
+                    },
+                    "entity": {
+                        "type": "string",
+                        "title": "Entity"
+                    },
+                    "data": {
+                        "type": "string",
+                        "title": "Data",
+                        "default": "2024-12-05T10:07:30.653618"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "user_id",
+                    "entity",
+                    "id"
+                ],
+                "title": "LoggerCreate"
             },
             "Permissions": {
                 "properties": {

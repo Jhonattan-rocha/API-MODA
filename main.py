@@ -3,10 +3,11 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import database
+from app.middleware.loggerMiddleware import LoggingMiddleware
 from app.middleware.securityHeaders import SecurityHeadersMiddleware
 from app.routers import (categoryRouter)
 from app.routers.DefaultRouters import companyRouter, subCategoryRouter, productCategoryRouter, personRouter, \
-    productRouter, userRouter, userProfileRouter, permissionsRouter, tokenRouter, employeeRouter, inputOutputStockRouter, fileRouter
+    productRouter, userRouter, userProfileRouter, permissionsRouter, tokenRouter, employeeRouter, inputOutputStockRouter, fileRouter, logRouter
 from app.routers.CustomRouters import (dynamicFieldValueRouter, dynamicEntityRouter, dynamicFieldRouter,
                                        genericRouter)
 import os, logging
@@ -43,6 +44,7 @@ async def lifespan_startup(app: FastAPI):
     app.include_router(tokenRouter)
     app.include_router(inputOutputStockRouter)
     app.include_router(fileRouter)
+    app.include_router(logRouter)
     generate_doc()
     async with database.engine.begin() as conn:
         await conn.run_sync(database.Base.metadata.create_all)
@@ -87,6 +89,7 @@ app.add_middleware(
     allow_headers=["*"],  # Permite todos os cabeçalhos
 )
 app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(LoggingMiddleware)
 
 # Configuração do formato do log
 LOGGING_CONFIG["formatters"]["access"] = {

@@ -11,3 +11,4 @@ from app.routers.DefaultRouters.tokenRouter import router as tokenRouter
 from app.routers.DefaultRouters.employeeRouter import router as employeeRouter
 from app.routers.DefaultRouters.inputOutputStockRouter import router as inputOutputStockRouter
 from app.routers.DefaultRouters.fileRouter import router as fileRouter
+from app.routers.DefaultRouters.logRouter import router as logRouter

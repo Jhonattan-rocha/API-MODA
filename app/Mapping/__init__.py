@@ -1,6 +1,6 @@
 from app.models.CustomModels import (CustomEntityToEntity, DynamicEntity, DynamicFields, DynamicFieldToEntityValue)
 from app.models.DefaultModels import (User, UserProfile, Permissions, SubCategory, InputOutputStock, Company, Category,
-                                      Employees, Product, Person, ProductCategory, File)
+                                      Employees, Product, Person, ProductCategory, File, Logger)
 from typing import Any
 
 models_mapping: dict[str, Any] = {
@@ -20,6 +20,7 @@ models_mapping: dict[str, Any] = {
     "DynamicFields": DynamicFields,
     "DynamicFieldToEntityValue": DynamicFieldToEntityValue,
     "File": File,
+    "Logger": Logger,
     "*": DynamicFieldToEntityValue
 }
 

@@ -11,6 +11,7 @@ from app.schemas.DefaultSchemas import PermissionsCreate, Permissions, Permissio
 from app.schemas.DefaultSchemas import InputOutputStockCreate, InputOutputStock, InputOutputStockBase
 from app.schemas.DefaultSchemas import Token
 from app.schemas.DefaultSchemas import FileBase, FileCreate, FileResponse
+from app.schemas.DefaultSchemas import Logger, LoggerBase, LoggerCreate
 
 from app.schemas.CustomSchemas import DynamicEntityCreate, DynamicEntity, DynamicEntityBase
 from app.schemas.CustomSchemas import DynamicFieldsCreate, DynamicFields, DynamicFieldsBase
