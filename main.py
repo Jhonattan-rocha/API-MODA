@@ -100,7 +100,7 @@ LOGGING_CONFIG["formatters"]["access"] = {
 # Configuração do handler para salvar os logs em arquivo
 LOGGING_CONFIG["handlers"]["file"] = {
     "class": "logging.FileHandler",
-    "filename": "access.log",  # Nome do arquivo de log
+    "filename": ".\\logs\\access.log",  # Nome do arquivo de log
     "formatter": "access",
 }
 
@@ -114,5 +114,8 @@ LOGGING_CONFIG["loggers"]["uvicorn.access"] = {
 if __name__ == "__main__":
     import uvicorn
     import sys
-
+    import os
+    
+    if not os.path.exists(os.path.join(".", "logs")):    
+        os.mkdir(os.path.join(".", "logs"))
     uvicorn.run("main:app", host=sys.argv[1], port=8081, reload=True, log_config=LOGGING_CONFIG, proxy_headers=True)
