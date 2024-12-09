@@ -30,4 +30,4 @@ from app.controllers.DefaultControllers.tokenController import (create_access_to
                                                                 oauth2_scheme, ACCESS_TOKEN_EXPIRE_MINUTES, ALGORITHM)
 from app.controllers.DefaultControllers.employeeController import (get_employee, get_employees, create_employee,
                                                                    delete_employee, update_employee)
-from app.controllers.DefaultControllers.logController import create_log, delete_log, get_logs
+from app.controllers.DefaultControllers.logController import create_log, get_logs

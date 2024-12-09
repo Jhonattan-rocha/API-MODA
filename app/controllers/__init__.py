@@ -26,7 +26,7 @@ from app.controllers.DefaultControllers import (create_access_token, verify_toke
                                                 oauth2_scheme, ACCESS_TOKEN_EXPIRE_MINUTES, ALGORITHM)
 from app.controllers.DefaultControllers import get_employees, get_employee, delete_employee, create_employee, update_employee
 
-from app.controllers.DefaultControllers import get_logs, create_log, delete_log
+from app.controllers.DefaultControllers import get_logs, create_log
 
 from app.controllers.CustomControllers import (get_dynamic_entities, get_dynamic_entity,
                                                create_dynamic_entities,

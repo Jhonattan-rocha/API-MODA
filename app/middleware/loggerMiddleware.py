@@ -3,8 +3,9 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from fastapi import Request, HTTPException, status
 import jwt
 from app.database import SessionLocal
-from app.controllers.DefaultControllers import get_user
+from app.controllers.DefaultControllers import get_user, create_log
 from app.controllers.DefaultControllers import SECRET_KEY, ALGORITHM
+from app.schemas.DefaultSchemas import LoggerBase
 import datetime
 import os
 
@@ -23,7 +24,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             
             user_id = await self.extract_user_id(request)
             user_info = None
-
+            print(request.url, user_id)
             # Busca informações do usuário
             if user_id:
                 try:
@@ -42,39 +43,59 @@ class LoggingMiddleware(BaseHTTPMiddleware):
                         headers={"WWW-Authenticate": "Bearer"},
                     )
 
-            request_data = {
-                "method": request.method,
-                "url": str(request.url),
-                "headers": dict(request.headers),
-                "body": request_body.decode('utf-8') if request_body else None,
-                "action": action,
-                "user": user_info, 
-                "type": "request",
-                "date": f"{datetime.datetime.now()}"
-            }
+                request_data = {
+                    "method": request.method,
+                    "url": str(request.url),
+                    "headers": dict(request.headers),
+                    "body": request_body.decode('utf-8') if request_body else None,
+                    "action": action,
+                    "user": user_info, 
+                    "type": "request",
+                    "date": f"{datetime.datetime.now()}"
+                }
 
-            # Salva o log da requisição
-            with open(os.path.join(".", "logs", f"requests_{datetime.datetime.now().strftime("%Y-%m-%d")}.log"), "a+") as file:
-                file.write(json.dumps(request_data) + "\n")
+                # Salva o log da requisição
+                with open(os.path.join(".", "logs", f"requests_{datetime.datetime.now().strftime("%Y-%m-%d")}.log"), "a+") as file:
+                    file.write(json.dumps(request_data) + "\n")
 
-            # Processa a requisição
-            response = await call_next(request)
+                log = LoggerBase(**{
+                    "action": action,
+                    "user_id": int(user_id) if user_id else int(user_info["id"]),
+                    "entity": request.url.path,
+                    "data": json.dumps(request_data)
+                })
+                
+                await create_log(db, log)
+                
+                # Processa a requisição
+                response = await call_next(request)
 
-            # Captura os dados da resposta
-            response_data = {
-                "status_code": response.status_code,
-                "headers": dict(response.headers),
-                "action": action,
-                "user": user_info,  # Inclui as informações do usuário na resposta
-                "type": "response",
-                "date": f"{datetime.datetime.now()}"
-            }
+                # Captura os dados da resposta
+                response_data = {
+                    "status_code": response.status_code,
+                    "headers": dict(response.headers),
+                    "action": action,
+                    "user": user_info,  # Inclui as informações do usuário na resposta
+                    "type": "response",
+                    "date": f"{datetime.datetime.now()}"
+                }
 
-            # Salva o log da resposta
-            with open(os.path.join(".", "logs", f"requests_{datetime.datetime.now().strftime("%Y-%m-%d")}.log"), "a+") as file:
-                file.write(json.dumps(response_data) + "\n")
+                # Salva o log da resposta
+                with open(os.path.join(".", "logs", f"requests_{datetime.datetime.now().strftime("%Y-%m-%d")}.log"), "a+") as file:
+                    file.write(json.dumps(response_data) + "\n")
+                
+                log = LoggerBase(**{
+                    "action": action,
+                    "user_id": int(user_id) if user_id else int(user_info["id"]),
+                    "entity": request.url.path,
+                    "data": json.dumps(request_data)
+                })
+                
+                await create_log(db, log)
 
-            return response
+                return response
+            else:
+                return await call_next(request)
 
     async def extract_user_id(self, request: Request) -> int:
         """

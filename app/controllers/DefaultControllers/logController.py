@@ -29,12 +29,3 @@ async def get_logs(db: AsyncSession, skip: int = 0, limit: int = 10, filters: Op
         .limit(limit if limit > 0 else None)
     )
     return result.scalars().unique().all()
-
-async def delete_log(db: AsyncSession, log_id: int):
-    result = await db.execute(select(Logger).where(Logger.id == log_id))
-    log = result.scalars().first()
-    if log is None:
-        return None
-    await db.delete(log)
-    await db.commit()
-    return log

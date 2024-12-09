@@ -1,6 +1,8 @@
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.backends import default_backend
+from fastapi import Request
+from starlette.middleware.base import BaseHTTPMiddleware
 import globals
 
 SECRET_KEY = globals.aes_key
@@ -20,3 +22,7 @@ def decrypt_aes(data: bytes, key: bytes, iv: bytes) -> bytes:
     unpadder = padding.PKCS7(algorithms.AES.block_size).unpadder()
     decrypted_data = decryptor.update(data) + decryptor.finalize()
     return unpadder.update(decrypted_data) + unpadder.finalize()
+
+class EncryptMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        pass
